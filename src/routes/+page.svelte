@@ -1,2 +1,18 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+<script lang="ts">
+	import AddMindSection from '$lib/common/mind/addMindSection.svelte';
+	import MindSection from '$lib/common/mind/mindSection.svelte';
+</script>
+
+<svelte:head>
+	<title>OnMyMind</title>
+	<meta
+		name="description"
+		content="An app to track multiple tasks running in parallel with Pomodoro rules and stat tracking."
+	/>
+</svelte:head>
+
+<h1>OnMyMind</h1>
+<div>
+	<AddMindSection />
+	<MindSection />
+</div>
