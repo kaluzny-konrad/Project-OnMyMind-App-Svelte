@@ -1,6 +1,6 @@
 <script lang="ts">
-	import AddMindSection from '$lib/common/mind/addMindSection.svelte';
-	import MindSection from '$lib/common/mind/mindSection.svelte';
+	import AddMindSection from '$lib/common/mind/AddMindSection.svelte';
+	import MindSection from '$lib/common/mind/MindSection.svelte';
 </script>
 
 <svelte:head>
@@ -11,7 +11,6 @@
 	/>
 </svelte:head>
 
-<h1>OnMyMind</h1>
 <div>
 	<AddMindSection />
 	<MindSection />

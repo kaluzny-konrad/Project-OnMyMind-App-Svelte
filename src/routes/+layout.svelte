@@ -1,7 +1,10 @@
 <script lang="ts">
 	import '../app.css';
 	import './styles.css';
+	import Header from './Header.svelte';
 </script>
+
+<Header />
 
 <div class="app">
 	<main>
