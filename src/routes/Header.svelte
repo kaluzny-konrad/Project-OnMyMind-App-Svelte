@@ -4,11 +4,13 @@
 </script>
 
 <header class="mb-4">
-	<nav class="bg-white shadow container mx-auto px-6 py-4">
-		<div class="flex items-center justify-between">
-			<Logo />
-			<div class="flex">
-				<Pomodoro />
+	<nav class="bg-white shadow">
+		<div class="container mx-auto px-6 py-4">
+			<div class="flex items-center justify-between">
+				<Logo />
+				<div class="flex">
+					<Pomodoro />
+				</div>
 			</div>
 		</div>
 	</nav>
