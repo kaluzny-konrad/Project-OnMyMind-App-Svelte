@@ -7,19 +7,18 @@
 		stopTimerInStore,
 	} from '$lib/store/timerStore';
 	import type Timer from '$lib/store/timerStore';
-	import { writable } from 'svelte/store';
+	import TimeVizualizer from './TimeVizualizer.svelte';
 
 	import StartPath from '$lib/common/iconPaths/StartPath.svelte';
 	import PausePath from '$lib/common/iconPaths/PausePath.svelte';
 	import Icon from '$lib/common/elements/Icon.svelte';
-	import TimeVizualizer from './TimeVizualizer.svelte';
 
 	export let mindId: string;
 	export let active: boolean;
 	let timer: Timer;
 	let interval: NodeJS.Timer;
 	$: isRunning = false;
-	$: time = writable(0);
+	$: time = 0;
 
 	onMount(() => {
 		timer = getTimerFromStore(mindId) ?? addTimerToStore(mindId);
@@ -39,12 +38,12 @@
 
 	function refreshTimer() {
 		isRunning = timer.isRunning;
-		time.update(() => timer.time);
+		time = timer.time;
 	}
 </script>
 
 <div class="flex items-center justify-center space-x-4 text-center">
-	<TimeVizualizer time={$time} />
+	<TimeVizualizer {time} />
 	{#if active}
 		{#if isRunning}
 			<button class="round-button gray-button" on:click={pauseTimer}

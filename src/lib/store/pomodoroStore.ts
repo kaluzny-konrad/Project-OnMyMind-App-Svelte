@@ -6,8 +6,7 @@ import { browser } from '$app/environment';
 export default interface Pomodoro {
 	id: string;
 	isRunning: boolean;
-	time: number;
-	maxTime: number;
+	remainingTime: number;
 }
 
 const storageName = 'pomodoro';
@@ -28,8 +27,7 @@ export const addPomodoroToStore = (maxTime: number): Pomodoro => {
 	let pomodoro: Pomodoro = {
 		id: uuidv4(),
 		isRunning: false,
-		time: 0,
-		maxTime: maxTime,
+		remainingTime: maxTime,
 	};
 
 	pomodoros.update((currentPomodoros: Pomodoro[]) => {
@@ -38,13 +36,12 @@ export const addPomodoroToStore = (maxTime: number): Pomodoro => {
 	return pomodoro;
 };
 
-export const getPomodoroFromStore = (id: string): Pomodoro | null => {
+export const getPomodoroFromStore = (): Pomodoro | null => {
 	let pomodoro: Pomodoro | null = null;
 	pomodoros.subscribe((currentPomodoros: Pomodoro[]) => {
-		pomodoro = currentPomodoros.find(
-			(pomodoro: Pomodoro) => pomodoro.id === id,
-		) as Pomodoro;
+		pomodoro = currentPomodoros.find(() => true) as Pomodoro;
 	});
+	console.log(pomodoro);
 	return pomodoro;
 };
 
@@ -77,8 +74,8 @@ export const updatePomodoroTimeInStore = (): void => {
 	pomodoros.update((pomodoros) => {
 		pomodoros.forEach((pomodoro) => {
 			if (pomodoro.isRunning) {
-				if (pomodoro.time === 1) pomodoro.isRunning = false;
-				pomodoro.time -= 1;
+				if (pomodoro.remainingTime === 1) pomodoro.isRunning = false;
+				pomodoro.remainingTime -= 1;
 			}
 		});
 		return pomodoros;

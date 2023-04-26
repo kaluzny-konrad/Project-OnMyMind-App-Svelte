@@ -1,90 +1,92 @@
 <script lang="ts">
-	import { onDestroy } from 'svelte';
-	import { writable } from 'svelte/store';
+	import { onMount, onDestroy } from 'svelte';
 
 	import StartPath from '$lib/common/iconPaths/StartPath.svelte';
 	import PausePath from '$lib/common/iconPaths/PausePath.svelte';
 	import Icon from '$lib/common/elements/Icon.svelte';
-	import StopPath from '../iconPaths/StopPath.svelte';
+	import TimeVizualizer from '$lib/common/timer/TimeVizualizer.svelte';
+
+	import {
+		addPomodoroToStore,
+		deletePomodoroFromStore,
+		getPomodoroFromStore,
+		startPomodoroInStore,
+		stopPomodoroInStore,
+	} from '$lib/store/pomodoroStore';
+	import type Pomodoro from '$lib/store/pomodoroStore';
+	import ResetPath from '../iconPaths/ResetPath.svelte';
 
 	const MAX_TIME = 15 * 60; // maksymalny czas w sekundach
-	const INTERVAL_TIME = 1000; // co ile milisekund aktualizować czas
 
-	let timer: NodeJS.Timer;
-	$: intervalId = timer as unknown as number;
-	$: remainingTime = MAX_TIME;
+	let interval: NodeJS.Timer;
+	let pomodoro: Pomodoro;
+	$: isLoaded = false;
 	$: isRunning = false;
+	$: remainingTime = MAX_TIME;
 
-	const timeLeft = writable(MAX_TIME);
+	onMount(() => {
+		pomodoro = getPomodoroFromStore() ?? addPomodoroToStore(MAX_TIME);
+		refreshPomodoro();
+		interval = setInterval(refreshPomodoro, 1);
+		isLoaded = true;
+	});
 
-	function tickTime() {
-		remainingTime--;
-		timeLeft.set(remainingTime);
-		if (remainingTime === 0) {
-			pauseTimer();
+	function startPomodoro() {
+		if (pomodoro) {
+			startPomodoroInStore(pomodoro.id);
+			refreshPomodoro();
 		}
 	}
 
-	function pauseTimer() {
-		clearInterval(intervalId);
-		isRunning = false;
+	function pausePomodoro() {
+		if (pomodoro) {
+			stopPomodoroInStore(pomodoro.id);
+			refreshPomodoro();
+		}
 	}
 
-	function resetTimer() {
-		pauseTimer();
-		remainingTime = MAX_TIME;
-		timeLeft.set(remainingTime);
+	function resetPomodoro() {
+		if (pomodoro) {
+			deletePomodoroFromStore(pomodoro.id);
+			pomodoro = addPomodoroToStore(MAX_TIME);
+			refreshPomodoro();
+		}
 	}
 
-	function startTimer() {
-		timer = setInterval(tickTime, INTERVAL_TIME);
-		isRunning = true;
+	function refreshPomodoro() {
+		if (pomodoro) {
+			isRunning = pomodoro.isRunning;
+			remainingTime = pomodoro.remainingTime;
+		}
 	}
 
 	onDestroy(() => {
-		pauseTimer();
+		pausePomodoro();
 	});
-
-	function formatTime(time: number): string {
-		const minutes = Math.floor(time / 60);
-		const seconds = time - minutes * 60;
-		return `${minutes.toString().padStart(2, '0')}:${seconds
-			.toString()
-			.padStart(2, '0')}`;
-	}
 </script>
 
-<div class="text-center">
-	<div class="mb-4 text-4xl font-bold">
-		{formatTime($timeLeft)}
+{#if isLoaded}
+	<div class="text-center">
+		<div class="flex justify-center space-x-4">
+			<TimeVizualizer time={remainingTime} />
+			{#if isRunning}
+				<button class="round-button gray-button" on:click={pausePomodoro}>
+					<Icon>
+						<PausePath />
+					</Icon>
+				</button>
+			{:else}
+				<button class="round-button blue-button" on:click={startPomodoro}>
+					<Icon>
+						<StartPath />
+					</Icon>
+				</button>
+			{/if}
+			<button class="round-button red-button" on:click={resetPomodoro}>
+				<Icon>
+					<ResetPath />
+				</Icon>
+			</button>
+		</div>
 	</div>
-	<div class="flex justify-center space-x-4">
-		{#if isRunning}
-			<button
-				class="round-button gray-button"
-				on:click={pauseTimer}
-			>
-				<Icon>
-					<PausePath />
-				</Icon>
-			</button>
-			<button
-				class="round-button red-button"
-				on:click={resetTimer}
-			>
-				<Icon>
-					<StopPath />
-				</Icon>
-			</button>
-		{:else}
-			<button
-				class="round-button blue-button"
-				on:click={startTimer}
-			>
-				<Icon>
-					<StartPath />
-				</Icon>
-			</button>
-		{/if}
-	</div>
-</div>
+{/if}
