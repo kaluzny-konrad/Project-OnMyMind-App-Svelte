@@ -3,11 +3,14 @@
 	import Icon from '$lib/common/elements/Icon.svelte';
 	import AddPath from '$lib/common/iconPaths/AddPath.svelte';
 	import TimeSum from '$lib/common/timer/TimeSum.svelte';
+	import { addTimerToStore, startTimerInStore } from '$lib/store/timerStore';
 
 	function addMind() {
 		const mindInput = document.getElementById('mind-input') as HTMLInputElement;
 		const mind = mindInput.value ?? '';
-		addMindToStore(mind);
+		let id = addMindToStore(mind);
+		addTimerToStore(id);
+		startTimerInStore(id);
 		mindInput.value = '';
 	}
 </script>

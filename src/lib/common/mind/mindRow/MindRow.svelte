@@ -5,6 +5,8 @@
 	import ReopenMindButton from './ReopenMindButton.svelte';
 	import EditMindInput from './EditMindInput.svelte';
 	import Timer from '$lib/common/timer/Timer.svelte';
+	import { onMount } from 'svelte';
+	import { startTimerInStore } from '$lib/store/timerStore';
 
 	export let mind: Mind;
 </script>

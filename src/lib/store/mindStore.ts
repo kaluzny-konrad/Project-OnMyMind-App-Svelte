@@ -12,48 +12,36 @@ interface Mind {
 const storageName = 'minds-list';
 
 const data: Mind[] = browser
-	? JSON.parse(
-			window.localStorage.getItem(storageName) as string,
-	  ) ?? []
+	? JSON.parse(window.localStorage.getItem(storageName) as string) ?? []
 	: [];
 
 export const minds: Writable<Mind[]> = writable(data);
 
 minds.subscribe((value: Mind[]) => {
 	if (browser) {
-		localStorage.setItem(
-			storageName,
-			JSON.stringify(value),
-		);
+		localStorage.setItem(storageName, JSON.stringify(value));
 	}
 });
 
-export const addMindToStore = (mindName: string): void => {
+export const addMindToStore = (mindName: string): string => {
+	let id = uuidv4();
 	minds.update((currentMinds: Mind[]) => {
-		return [
-			...currentMinds,
-			{ id: uuidv4(), name: mindName, isComplete: false },
-		];
+		return [{ id: id, name: mindName, isComplete: false }, ...currentMinds];
 	});
+	return id;
 };
 
 export const deleteMindFromStore = (id: string): void => {
 	minds.update((currentMinds: Mind[]) => {
-		return currentMinds.filter(
-			(mind: Mind) => mind.id !== id,
-		);
+		return currentMinds.filter((mind: Mind) => mind.id !== id);
 	});
 };
 
 export const toggleCompleteInStore = (id: string): void => {
 	minds.update((currentMinds: Mind[]) => {
-		const mindToToggle = currentMinds.find(
-			(mind: Mind) => mind.id === id,
-		);
+		const mindToToggle = currentMinds.find((mind: Mind) => mind.id === id);
 		if (!mindToToggle) return currentMinds;
-		const updatedMinds = currentMinds.filter(
-			(mind: Mind) => mind.id !== id,
-		);
+		const updatedMinds = currentMinds.filter((mind: Mind) => mind.id !== id);
 		if (mindToToggle.isComplete) {
 			updatedMinds.unshift({
 				...mindToToggle,
@@ -69,10 +57,7 @@ export const toggleCompleteInStore = (id: string): void => {
 	});
 };
 
-export const changeMindNameInStore = (
-	id: string,
-	name: string,
-): void => {
+export const changeMindNameInStore = (id: string, name: string): void => {
 	minds.update((currentMinds: Mind[]) => {
 		return currentMinds.map((mind: Mind) => {
 			if (mind.id === id) {
