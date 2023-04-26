@@ -12,9 +12,7 @@
 <div class="wide-component">
 	<div class="wide-row">
 		<EditMindInput {mind} />
-
 		<Timer mindId={mind.id} active={!mind.isComplete} />
-
 		{#if mind.isComplete}
 			<ReopenMindButton {mind} />
 			<DeleteMindButton {mind} />

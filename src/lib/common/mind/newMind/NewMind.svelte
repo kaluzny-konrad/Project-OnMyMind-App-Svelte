@@ -13,6 +13,7 @@
 </script>
 
 <div class="wide-component">
+	<div class="wide-component-title">New addMindToStore</div>
 	<div class="wide-row">
 		<label for="mind-input" class="sr-only">New mind</label>
 		<input

@@ -3,21 +3,24 @@
 @tailwind utilities;
 
 @layer components {
-	.input-text {
-		@apply flex-grow rounded-md border border-gray-300 px-4 py-2 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-400;
-	}
 	.wide-component {
 		@apply mx-auto mt-2 max-w-5xl space-y-4 px-2 lg:px-8;
 	}
+	.wide-row {
+		@apply flex items-center justify-center space-x-2;
+	}
+
 	.wide-component-title {
 		@apply pt-4 text-center font-bold text-gray-700;
 	}
 	.wide-component-text {
 		@apply text-center text-gray-500;
 	}
-	.wide-row {
-		@apply flex items-center justify-center space-x-2;
+
+	.input-text {
+		@apply w-2 flex-grow rounded-md border border-gray-300 px-4 py-2 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-400;
 	}
+
 	.round-button {
 		@apply rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-opacity-50;
 	}
