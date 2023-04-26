@@ -40,6 +40,20 @@ export const addTimerToStore = (): Timer => {
 	return timer;
 };
 
+export const getTimerFromStore = (id: string): Timer => {
+	let timer: Timer = {
+		id: uuidv4(),
+		isRunning: false,
+		time: 0,
+	};
+	timers.subscribe((currentTimers: Timer[]) => {
+		timer = currentTimers.find(
+			(timer: Timer) => timer.id === id,
+		) as Timer;
+	});
+	return timer;
+};
+
 export const deleteTimerFromStore = (id: string): void => {
 	timers.update((currentTimers: Timer[]) => {
 		return currentTimers.filter(

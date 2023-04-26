@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { onMount, onDestroy } from 'svelte';
 	import {
+		getTimerFromStore,
 		addTimerToStore,
 		startTimerInStore,
 		stopTimerInStore,
@@ -8,11 +9,14 @@
 	} from '$lib/store/timerStore';
 	import type Timer from '$lib/store/timerStore';
 	import { writable } from 'svelte/store';
+	import { createEventDispatcher } from 'svelte';
 
 	let timer: Timer;
 	let interval: NodeJS.Timer;
 	$: isRunning = false;
 	$: time = writable(0);
+
+	const dispatch = createEventDispatcher();
 
 	onMount(() => {
 		timer = addTimerToStore();
@@ -22,6 +26,7 @@
 		startTimerInStore(timer.id);
 		isRunning = timer.isRunning;
 		interval = setInterval(tickTime, 1000);
+		dispatch('start', { id: timer.id });
 	}
 
 	function pauseTimer() {
@@ -35,6 +40,9 @@
 	});
 
 	function tickTime() {
+		timer = getTimerFromStore(timer.id);
+		isRunning = timer.isRunning;
+		if (!isRunning) pauseTimer();
 		tickTimeInStore(timer.id);
 		time.update(() => timer.time);
 	}
