@@ -3,11 +3,13 @@
 	import type Mind from '$lib/types/mind';
 	import DeletePath from '$lib/common/iconPaths/DeletePath.svelte';
 	import Icon from '$lib/common/elements/Icon.svelte';
+	import { deleteTimerFromStore } from '$lib/store/timerStore';
 
 	export let mind: Mind;
 
 	function deleteMind() {
 		deleteMindFromStore(mind.id);
+		deleteTimerFromStore(mind.id);
 	}
 </script>
 

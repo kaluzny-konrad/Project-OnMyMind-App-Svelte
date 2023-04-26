@@ -3,11 +3,13 @@
 	import type Mind from '$lib/types/mind';
 	import CompletePath from '$lib/common/iconPaths/CompletePath.svelte';
 	import Icon from '$lib/common/elements/Icon.svelte';
+	import { stopTimerInStore } from '$lib/store/timerStore';
 
 	export let mind: Mind;
 
 	function toggleComplete() {
 		toggleCompleteInStore(mind.id);
+		stopTimerInStore(mind.id);
 	}
 </script>
 

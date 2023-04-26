@@ -13,14 +13,13 @@
 	<div class="wide-row">
 		<EditMindInput {mind} />
 
-		<Timer />
+		<Timer mindId={mind.id} active={!mind.isComplete} />
 
 		{#if mind.isComplete}
 			<ReopenMindButton {mind} />
+			<DeleteMindButton {mind} />
 		{:else}
 			<CompleteMindButton {mind} />
 		{/if}
-
-		<DeleteMindButton {mind} />
 	</div>
 </div>

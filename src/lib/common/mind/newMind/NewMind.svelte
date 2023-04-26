@@ -5,14 +5,10 @@
 	import TimeSum from '$lib/common/timer/TimeSum.svelte';
 
 	function addMind() {
-		const mindInput = document.getElementById(
-			'mind-input',
-		) as HTMLInputElement;
-		const mind = mindInput.value;
-		if (mind) {
-			addMindToStore(mind);
-			mindInput.value = '';
-		}
+		const mindInput = document.getElementById('mind-input') as HTMLInputElement;
+		const mind = mindInput.value ?? '';
+		addMindToStore(mind);
+		mindInput.value = '';
 	}
 </script>
 
@@ -25,11 +21,7 @@
 			placeholder="Enter a mind"
 			class="input-text"
 		/>
-		<button
-			type="button"
-			on:click={addMind}
-			class="round-button blue-button"
-		>
+		<button type="button" on:click={addMind} class="round-button blue-button">
 			<Icon><AddPath /></Icon>
 		</button>
 

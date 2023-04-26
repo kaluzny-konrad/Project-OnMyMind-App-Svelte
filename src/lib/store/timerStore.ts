@@ -1,10 +1,9 @@
-import { v4 as uuidv4 } from 'uuid';
 import type { Writable } from 'svelte/store';
 import { writable } from 'svelte/store';
 import { browser } from '$app/environment';
 
 export default interface Timer {
-	id: string;
+	mindId: string;
 	isRunning: boolean;
 	time: number;
 }
@@ -12,90 +11,81 @@ export default interface Timer {
 const storageName = 'timers-list';
 
 const data: Timer[] = browser
-	? JSON.parse(
-			window.localStorage.getItem(storageName) as string,
-	  ) ?? []
+	? JSON.parse(window.localStorage.getItem(storageName) as string) ?? []
 	: [];
 
 export const timers: Writable<Timer[]> = writable(data);
 
 timers.subscribe((value: Timer[]) => {
 	if (browser) {
-		localStorage.setItem(
-			storageName,
-			JSON.stringify(value),
-		);
+		localStorage.setItem(storageName, JSON.stringify(value));
 	}
 });
 
-export const addTimerToStore = (): Timer => {
+export const addTimerToStore = (mindId: string): Timer => {
 	let timer: Timer = {
-		id: uuidv4(),
+		mindId: mindId,
 		isRunning: false,
 		time: 0,
 	};
+
 	timers.update((currentTimers: Timer[]) => {
 		return [...currentTimers, timer];
 	});
 	return timer;
 };
 
-export const getTimerFromStore = (id: string): Timer => {
-	let timer: Timer = {
-		id: uuidv4(),
-		isRunning: false,
-		time: 0,
-	};
+export const getTimerFromStore = (mindId: string): Timer | null => {
+	let timer: Timer | null = null;
 	timers.subscribe((currentTimers: Timer[]) => {
 		timer = currentTimers.find(
-			(timer: Timer) => timer.id === id,
+			(timer: Timer) => timer.mindId === mindId,
 		) as Timer;
 	});
 	return timer;
 };
 
-export const deleteTimerFromStore = (id: string): void => {
+export const deleteTimerFromStore = (mindId: string): void => {
 	timers.update((currentTimers: Timer[]) => {
-		return currentTimers.filter(
-			(timer: Timer) => timer.id !== id,
-		);
+		return currentTimers.filter((timer: Timer) => timer.mindId !== mindId);
 	});
 };
 
-export const startTimerInStore = (id: string): void => {
+export const startTimerInStore = (mindId: string): void => {
 	timers.update((timers) => {
 		timers.forEach((timer) => (timer.isRunning = false));
-		const timer = timers.find((timer) => timer.id === id);
+		const timer = timers.find((timer) => timer.mindId === mindId);
 		if (!timer) return timers;
 		timer.isRunning = true;
 		return timers;
 	});
 };
 
-export const stopTimerInStore = (id: string): void => {
+export const stopTimerInStore = (mindId: string): void => {
 	timers.update((timers) => {
-		const timer = timers.find((timer) => timer.id === id);
-		if (!timer) return timers;
-		timer.isRunning = false;
+		const timer = timers.find((timer) => timer.mindId === mindId);
+		if (timer) timer.isRunning = false;
 		return timers;
 	});
 };
 
-export const tickTimeInStore = (id: string): void => {
+export const updateTimerTimeInStore = (): void => {
 	timers.update((timers) => {
-		const timer = timers.find((timer) => timer.id === id);
-		if (!timer) return timers;
-		timer.time = timer.time + 1;
+		timers.forEach((timer) => {
+			if (timer?.isRunning) timer.time = timer.time + 1;
+		});
 		return timers;
 	});
 };
 
-export const getActiveTimers = (): number => {
-	let count = 0;
+setInterval(updateTimerTimeInStore, 1000);
+
+export const getSumOfCountedTime = (): number => {
+	let sum = 0;
 	timers.subscribe((currentTimers: Timer[]) => {
 		currentTimers.forEach((timer) => {
-			if (timer.isRunning && timer.time > 0) count += 1;
+			sum += timer.time;
 		});
 	});
-	return count;
+	return sum;
 };
