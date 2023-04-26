@@ -4,10 +4,18 @@
 	"singleQuote": true,
 	"trailingComma": "all",
 	"tabWidth": 2,
-	"printWidth": 60,
-	"plugins": ["prettier-plugin-svelte", "prettier-plugin-tailwindcss"],
+	"printWidth": 80,
+	"plugins": [
+		"prettier-plugin-svelte",
+		"prettier-plugin-tailwindcss"
+	],
 	"pluginSearchDirs": ["."],
-	"overrides": [{ "files": "*.svelte", "options": { "parser": "svelte" } }],
+	"overrides": [
+		{
+			"files": "*.svelte",
+			"options": { "parser": "svelte" }
+		}
+	],
 	"arrowParens": "always",
 	"quoteProps": "consistent",
 	"endOfLine": "auto"
