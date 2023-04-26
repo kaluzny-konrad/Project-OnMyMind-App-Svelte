@@ -13,7 +13,7 @@
 <input
 	id={`${mind.id}-checkbox`}
 	type="text"
-	placeholder="Enter a mind"
+	placeholder="Zajmuje się..."
 	bind:value={mind.name}
 	on:input={() => nameChanged()}
 	class="input-text"

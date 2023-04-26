@@ -16,13 +16,13 @@
 </script>
 
 <div class="wide-component">
-	<div class="wide-component-title">New mind</div>
+	<div class="wide-component-title">Nowa sprawa</div>
 	<div class="wide-row">
-		<label for="mind-input" class="sr-only">New mind</label>
+		<label for="mind-input" class="sr-only">Nowa sprawa</label>
 		<input
 			type="text"
 			id="mind-input"
-			placeholder="Enter a mind"
+			placeholder="Teraz zajmę się..."
 			class="input-text"
 		/>
 		<button type="button" on:click={addMind} class="round-button blue-button">
