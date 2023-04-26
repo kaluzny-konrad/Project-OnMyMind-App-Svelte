@@ -9,14 +9,16 @@
 	} from '$lib/store/timerStore';
 	import type Timer from '$lib/store/timerStore';
 	import { writable } from 'svelte/store';
-	import { createEventDispatcher } from 'svelte';
+
+	import StartPath from '$lib/common/iconPaths/StartPath.svelte';
+	import PausePath from '$lib/common/iconPaths/PausePath.svelte';
+	import Icon from '$lib/common/elements/Icon.svelte';
+	import TimeVizualizer from './TimeVizualizer.svelte';
 
 	let timer: Timer;
 	let interval: NodeJS.Timer;
 	$: isRunning = false;
 	$: time = writable(0);
-
-	const dispatch = createEventDispatcher();
 
 	onMount(() => {
 		timer = addTimerToStore();
@@ -24,45 +26,47 @@
 
 	function startTimer() {
 		startTimerInStore(timer.id);
-		isRunning = timer.isRunning;
+		isRunning = true;
 		interval = setInterval(tickTime, 1000);
-		dispatch('start', { id: timer.id });
 	}
 
 	function pauseTimer() {
 		stopTimerInStore(timer.id);
-		isRunning = timer.isRunning;
+		isRunning = false;
 		clearInterval(interval as unknown as number);
 	}
 
-	onDestroy(() => {
-		if (timer?.id) stopTimerInStore(timer.id);
-	});
-
 	function tickTime() {
-		timer = getTimerFromStore(timer.id);
 		isRunning = timer.isRunning;
 		if (!isRunning) pauseTimer();
 		tickTimeInStore(timer.id);
 		time.update(() => timer.time);
 	}
 
-	function formatTime(time: number): string {
-		const minutes = Math.floor(time / 60);
-		const seconds = time - minutes * 60;
-		return `${minutes.toString().padStart(2, '0')}:${seconds
-			.toString()
-			.padStart(2, '0')}`;
-	}
+	onDestroy(() => {
+		if (timer?.id) stopTimerInStore(timer.id);
+	});
 </script>
 
-<div class="text-center">
-	<div class="mb-4 text-4xl font-bold">
-		{formatTime($time)}
-	</div>
+<div
+	class="flex items-center justify-center space-x-4 text-center"
+>
+	<TimeVizualizer time={$time} />
 	{#if isRunning}
-		<button on:click={pauseTimer}>Stop</button>
+		<button
+			class="round-button gray-button"
+			on:click={pauseTimer}
+			><Icon>
+				<PausePath />
+			</Icon></button
+		>
 	{:else}
-		<button on:click={startTimer}>Start</button>
+		<button
+			class="round-button blue-button"
+			on:click={startTimer}
+			><Icon>
+				<StartPath />
+			</Icon></button
+		>
 	{/if}
 </div>

@@ -85,7 +85,17 @@ export const tickTimeInStore = (id: string): void => {
 	timers.update((timers) => {
 		const timer = timers.find((timer) => timer.id === id);
 		if (!timer) return timers;
-		timer.time++;
+		timer.time = timer.time + 1;
 		return timers;
 	});
+};
+
+export const getActiveTimers = (): number => {
+	let count = 0;
+	timers.subscribe((currentTimers: Timer[]) => {
+		currentTimers.forEach((timer) => {
+			if (timer.isRunning && timer.time > 0) count += 1;
+		});
+	});
+	return count;
 };

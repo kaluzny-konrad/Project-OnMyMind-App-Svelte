@@ -2,6 +2,7 @@
 	import { addMindToStore } from '$lib/store/mindStore.js';
 	import Icon from '$lib/common/elements/Icon.svelte';
 	import AddPath from '$lib/common/iconPaths/AddPath.svelte';
+	import TimeSum from '$lib/common/timer/TimeSum.svelte';
 
 	function addMind() {
 		const mindInput = document.getElementById(
@@ -31,5 +32,7 @@
 		>
 			<Icon><AddPath /></Icon>
 		</button>
+
+		<TimeSum />
 	</div>
 </div>
