@@ -16,58 +16,87 @@
 	import type Pomodoro from '$lib/store/pomodoroStore';
 	import ResetPath from '../iconPaths/ResetPath.svelte';
 
-	const MAX_TIME = 15 * 60; // maksymalny czas w sekundach
-
 	let interval: NodeJS.Timer;
 	let pomodoro: Pomodoro;
+	let isStopped = true;
 	$: isLoaded = false;
 	$: isRunning = false;
-	$: remainingTime = MAX_TIME;
+	$: remainingTime = maxTime;
+	let maxTime = 15 * 60;
 
 	onMount(() => {
-		pomodoro = getPomodoroFromStore() ?? addPomodoroToStore(MAX_TIME);
+		pomodoro = getPomodoroFromStore() ?? addPomodoroToStore(maxTime);
+		maxTime = Math.floor(pomodoro.remainingTime / 60) * 60;
 		refreshPomodoro();
 		interval = setInterval(refreshPomodoro, 1);
+		audio = new Audio(audioUrl);
+		audio.addEventListener('ended', () => resetAudio());
 		isLoaded = true;
 	});
 
 	function startPomodoro() {
-		if (pomodoro) {
+		if (isLoaded) {
+			if (pomodoro.remainingTime == 0) resetPomodoro();
+			if (isStopped) {
+				deletePomodoroFromStore(pomodoro.id);
+				pomodoro = addPomodoroToStore(maxTime);
+			}
 			startPomodoroInStore(pomodoro.id);
+			isStopped = false;
 			refreshPomodoro();
 		}
 	}
 
 	function pausePomodoro() {
-		if (pomodoro) {
+		if (isLoaded) {
 			stopPomodoroInStore(pomodoro.id);
 			refreshPomodoro();
 		}
 	}
 
 	function resetPomodoro() {
-		if (pomodoro) {
+		if (isLoaded) {
 			deletePomodoroFromStore(pomodoro.id);
-			pomodoro = addPomodoroToStore(MAX_TIME);
+			resetAudio();
+			pomodoro = addPomodoroToStore(maxTime);
 			refreshPomodoro();
+			isStopped = true;
 		}
 	}
 
+	function resetAudio() {
+		audio.pause();
+		audio.currentTime = 0;
+	}
+
 	function refreshPomodoro() {
-		if (pomodoro) {
+		if (isLoaded && !isStopped) {
+			let wasRunning = isRunning;
 			isRunning = pomodoro.isRunning;
 			remainingTime = pomodoro.remainingTime;
+
+			if (
+				wasRunning &&
+				!isRunning &&
+				remainingTime === 0 &&
+				audio.paused === true
+			) {
+				audio.play();
+			}
 		}
 	}
 
 	onDestroy(() => {
 		pausePomodoro();
 	});
+
+	let audio: HTMLAudioElement;
+	const audioUrl = '/sounds/alarm2.mp3';
 </script>
 
 {#if isLoaded}
-	<div class="text-center">
-		<div class="flex justify-center space-x-4">
+	<div class="wide-component">
+		<div class="wide-row">
 			<TimeVizualizer time={remainingTime} />
 			{#if isRunning}
 				<button class="round-button gray-button" on:click={pausePomodoro}>
@@ -82,11 +111,28 @@
 					</Icon>
 				</button>
 			{/if}
-			<button class="round-button red-button" on:click={resetPomodoro}>
-				<Icon>
-					<ResetPath />
-				</Icon>
-			</button>
+
+			{#if isStopped}
+				<input
+					type="range"
+					class="slider"
+					id="pomodoroMaxTime"
+					min={60}
+					max={60 * 60}
+					step="60"
+					bind:value={maxTime}
+					disabled={isRunning}
+				/>
+				<label for="pomodoroMaxTime" class="sr-only"
+					>{maxTime / 60} minutes</label
+				>
+			{:else}
+				<button class="round-button red-button" on:click={resetPomodoro}>
+					<Icon>
+						<ResetPath />
+					</Icon>
+				</button>
+			{/if}
 		</div>
 	</div>
 {/if}

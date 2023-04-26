@@ -41,7 +41,6 @@ export const getPomodoroFromStore = (): Pomodoro | null => {
 	pomodoros.subscribe((currentPomodoros: Pomodoro[]) => {
 		pomodoro = currentPomodoros.find(() => true) as Pomodoro;
 	});
-	console.log(pomodoro);
 	return pomodoro;
 };
 
