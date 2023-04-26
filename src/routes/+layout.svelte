@@ -2,6 +2,7 @@
 	import '../app.css';
 	import './styles.css';
 	import Header from './Header.svelte';
+	import UsingTimer from '$lib/common/timer/UsingTimer.svelte';
 </script>
 
 <Header />
