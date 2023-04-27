@@ -1,6 +1,6 @@
 <script lang="ts">
-	import type Mind from '$lib/types/mind';
-	import MindRow from './mindRow/MindRow.svelte';
+	import type Mind from './mind';
+	import MindRow from './MindRow.svelte';
 
 	export let minds: Mind[];
 	export let title: string;

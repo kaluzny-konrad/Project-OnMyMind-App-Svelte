@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { onMount, onDestroy } from 'svelte';
 
-	import StartPath from '$lib/common/iconPaths/StartPath.svelte';
-	import PausePath from '$lib/common/iconPaths/PausePath.svelte';
-	import Icon from '$lib/common/elements/Icon.svelte';
-	import TimeVizualizer from '$lib/common/timer/TimeVizualizer.svelte';
+	import StartPath from './StartPath.svelte';
+	import PausePath from './PausePath.svelte';
+	import Icon from './Icon.svelte';
+	import TimeVizualizer from './TimeVizualizer.svelte';
 
 	import {
 		addPomodoroToStore,
@@ -12,9 +12,9 @@
 		getPomodoroFromStore,
 		startPomodoroInStore,
 		stopPomodoroInStore,
-	} from '$lib/store/pomodoroStore';
-	import type Pomodoro from '$lib/store/pomodoroStore';
-	import ResetPath from '../iconPaths/ResetPath.svelte';
+	} from './pomodoroStore';
+	import type Pomodoro from './pomodoroStore';
+	import ResetPath from './ResetPath.svelte';
 
 	let interval: NodeJS.Timer;
 	let pomodoro: Pomodoro;

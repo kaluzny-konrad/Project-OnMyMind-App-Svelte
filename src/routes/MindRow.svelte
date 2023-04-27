@@ -1,12 +1,10 @@
 <script lang="ts">
-	import type Mind from '$lib/types/mind';
+	import type Mind from './mind';
 	import DeleteMindButton from './DeleteMindButton.svelte';
 	import CompleteMindButton from './CompleteMindButton.svelte';
 	import ReopenMindButton from './ReopenMindButton.svelte';
 	import EditMindInput from './EditMindInput.svelte';
-	import Timer from '$lib/common/timer/Timer.svelte';
-	import { onMount } from 'svelte';
-	import { startTimerInStore } from '$lib/store/timerStore';
+	import Timer from './Timer.svelte';
 
 	export let mind: Mind;
 </script>

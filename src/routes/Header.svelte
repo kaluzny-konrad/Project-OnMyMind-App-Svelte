@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Logo from '$lib/common/elements/Logo.svelte';
+	import Logo from './Logo.svelte';
 </script>
 
 <header class="mb-4">

@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { toggleCompleteInStore } from '$lib/store/mindStore';
-	import type Mind from '$lib/types/mind';
-	import ResetPath from '$lib/common/iconPaths/ResetPath.svelte';
-	import Icon from '$lib/common/elements/Icon.svelte';
+	import { toggleCompleteInStore } from './mindStore';
+	import type Mind from './mind';
+	import ResetPath from './ResetPath.svelte';
+	import Icon from './Icon.svelte';
 
 	export let mind: Mind;
 
