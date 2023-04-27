@@ -1,9 +1,10 @@
 <script lang="ts">
 	import { onMount, onDestroy } from 'svelte';
 
-	import StartPath from './StartPath.svelte';
-	import PausePath from './PausePath.svelte';
-	import Icon from '../lib/icons/Icon.svelte';
+	import Icon from '../icons/Icon.svelte';
+	import StartPath from '../icons/StartPath.svelte';
+	import PausePath from '../icons/PausePath.svelte';
+	import ResetPath from '../icons/ResetPath.svelte';
 	import TimeVizualizer from './TimeVizualizer.svelte';
 
 	import {
@@ -14,7 +15,6 @@
 		stopPomodoroInStore,
 	} from './pomodoroStore';
 	import type Pomodoro from './pomodoroStore';
-	import ResetPath from './ResetPath.svelte';
 
 	let interval: NodeJS.Timer;
 	let pomodoro: Pomodoro;
@@ -91,7 +91,7 @@
 	});
 
 	let audio: HTMLAudioElement;
-	const audioUrl = '/sounds/alarm2.mp3';
+	const audioUrl = '/sounds/alarm.mp3';
 </script>
 
 {#if isLoaded}

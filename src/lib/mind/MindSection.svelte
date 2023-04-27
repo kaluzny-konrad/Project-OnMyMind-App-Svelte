@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { minds } from './mindStore';
-	import MindRows from './MindRows.svelte';
+	import { minds } from '../mind/mindStore';
+	import MindRows from '../mind/MindRows.svelte';
 	import NewMind from './NewMind.svelte';
 
 	$: openMinds = $minds.filter((mind) => mind.isComplete === false);

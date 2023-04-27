@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { addMindToStore } from './mindStore.js';
-	import Icon from '../lib/icons/Icon.svelte';
-	import AddPath from './AddPath.svelte';
-	import TimeSum from './TimeSum.svelte';
-	import { addTimerToStore, startTimerInStore } from './timerStore';
+	import Icon from '../icons/Icon.svelte';
+	import AddPath from '../icons/AddPath.svelte';
+	import TimeSum from '../timer/TimeSum.svelte';
+	import { addTimerToStore, startTimerInStore } from '../timer/timerStore';
 
 	function addMind() {
 		const mindInput = document.getElementById('mind-input') as HTMLInputElement;

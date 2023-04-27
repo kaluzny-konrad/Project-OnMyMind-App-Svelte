@@ -9,9 +9,9 @@
 	import type Timer from './timerStore';
 	import TimeVizualizer from './TimeVizualizer.svelte';
 
-	import StartPath from './StartPath.svelte';
-	import PausePath from './PausePath.svelte';
-	import Icon from '../lib/icons/Icon.svelte';
+	import StartPath from '../icons/StartPath.svelte';
+	import PausePath from '../icons/PausePath.svelte';
+	import Icon from '../icons/Icon.svelte';
 
 	export let mindId: string;
 	export let active: boolean;

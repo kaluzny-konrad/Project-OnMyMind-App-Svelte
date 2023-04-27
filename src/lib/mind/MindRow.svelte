@@ -4,7 +4,7 @@
 	import CompleteMindButton from './CompleteMindButton.svelte';
 	import ReopenMindButton from './ReopenMindButton.svelte';
 	import EditMindInput from './EditMindInput.svelte';
-	import Timer from './Timer.svelte';
+	import Timer from '../timer/Timer.svelte';
 
 	export let mind: Mind;
 </script>
