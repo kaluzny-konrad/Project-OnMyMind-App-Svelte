@@ -16,17 +16,25 @@
 	} from './pomodoroStore';
 	import type Pomodoro from './pomodoroStore';
 
+	const MAX_TIME = 15 * 60;
 	let interval: NodeJS.Timer;
 	let pomodoro: Pomodoro;
 	let isStopped = true;
 	$: isLoaded = false;
 	$: isRunning = false;
+	let maxTime = MAX_TIME;
 	$: remainingTime = maxTime;
-	let maxTime = 15 * 60;
 
 	onMount(() => {
 		pomodoro = getPomodoroFromStore() ?? addPomodoroToStore(maxTime);
+		isRunning = pomodoro.isRunning;
+		remainingTime = pomodoro.remainingTime;
+		isStopped = !pomodoro.isRunning;
 		maxTime = Math.floor(pomodoro.remainingTime / 60) * 60;
+		if (isStopped) {
+			pomodoro.remainingTime = MAX_TIME;
+			remainingTime = MAX_TIME;
+		}
 		refreshPomodoro();
 		interval = setInterval(refreshPomodoro, 1);
 		audio = new Audio(audioUrl);
@@ -36,7 +44,7 @@
 
 	function startPomodoro() {
 		if (isLoaded) {
-			if (pomodoro.remainingTime == 0) resetPomodoro();
+			if (pomodoro.remainingTime === 0) resetPomodoro();
 			if (isStopped) {
 				deletePomodoroFromStore(pomodoro.id);
 				pomodoro = addPomodoroToStore(maxTime);
@@ -117,9 +125,9 @@
 					type="range"
 					class="slider"
 					id="pomodoroMaxTime"
-					min={60}
+					min={1}
 					max={60 * 60}
-					step="60"
+					step="1"
 					bind:value={maxTime}
 					disabled={isRunning}
 				/>
