@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { changeMindNameInStore } from '$lib/store/mindStore';
-	import type Mind from '$lib/types/mind';
+	import { changeMindNameInStore } from './mindStore';
+	import type Mind from './mind';
 
 	export let mind: Mind;
 

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onMount, onDestroy } from 'svelte';
-	import { getSumOfCountedTime } from '$lib/store/timerStore';
+	import { getSumOfCountedTime } from './timerStore';
 	import TimeVizualizer from './TimeVizualizer.svelte';
 
 	$: time = 0;

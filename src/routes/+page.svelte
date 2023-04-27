@@ -1,6 +1,6 @@
 <script lang="ts">
-	import MindSection from '$lib/common/mind/MindSection.svelte';
-	import Pomodoro from '$lib/common/pomodoro/Pomodoro.svelte';
+	import MindSection from './MindSection.svelte';
+	import Pomodoro from './Pomodoro.svelte';
 </script>
 
 <svelte:head>

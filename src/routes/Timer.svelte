@@ -5,13 +5,13 @@
 		addTimerToStore,
 		startTimerInStore,
 		stopTimerInStore,
-	} from '$lib/store/timerStore';
-	import type Timer from '$lib/store/timerStore';
+	} from './timerStore';
+	import type Timer from './timerStore';
 	import TimeVizualizer from './TimeVizualizer.svelte';
 
-	import StartPath from '$lib/common/iconPaths/StartPath.svelte';
-	import PausePath from '$lib/common/iconPaths/PausePath.svelte';
-	import Icon from '$lib/common/elements/Icon.svelte';
+	import StartPath from './StartPath.svelte';
+	import PausePath from './PausePath.svelte';
+	import Icon from './Icon.svelte';
 
 	export let mindId: string;
 	export let active: boolean;

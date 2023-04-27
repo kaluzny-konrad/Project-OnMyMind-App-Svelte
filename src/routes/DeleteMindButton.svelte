@@ -1,9 +1,9 @@
 <script lang="ts">
-	import { deleteMindFromStore } from '$lib/store/mindStore';
-	import type Mind from '$lib/types/mind';
-	import DeletePath from '$lib/common/iconPaths/DeletePath.svelte';
-	import Icon from '$lib/common/elements/Icon.svelte';
-	import { deleteTimerFromStore } from '$lib/store/timerStore';
+	import { deleteMindFromStore } from './mindStore';
+	import type Mind from './mind';
+	import DeletePath from './DeletePath.svelte';
+	import Icon from './Icon.svelte';
+	import { deleteTimerFromStore } from './timerStore';
 
 	export let mind: Mind;
 
