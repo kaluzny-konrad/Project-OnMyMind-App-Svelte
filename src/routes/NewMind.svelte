@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { addMindToStore } from './mindStore.js';
-	import Icon from './Icon.svelte';
+	import Icon from '../lib/icons/Icon.svelte';
 	import AddPath from './AddPath.svelte';
 	import TimeSum from './TimeSum.svelte';
 	import { addTimerToStore, startTimerInStore } from './timerStore';

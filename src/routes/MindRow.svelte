@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type Mind from './mind';
+	import type Mind from './Mind';
 	import DeleteMindButton from './DeleteMindButton.svelte';
 	import CompleteMindButton from './CompleteMindButton.svelte';
 	import ReopenMindButton from './ReopenMindButton.svelte';

@@ -3,7 +3,7 @@
 
 	import StartPath from './StartPath.svelte';
 	import PausePath from './PausePath.svelte';
-	import Icon from './Icon.svelte';
+	import Icon from '../lib/icons/Icon.svelte';
 	import TimeVizualizer from './TimeVizualizer.svelte';
 
 	import {

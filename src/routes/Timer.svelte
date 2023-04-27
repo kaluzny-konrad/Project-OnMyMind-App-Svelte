@@ -11,7 +11,7 @@
 
 	import StartPath from './StartPath.svelte';
 	import PausePath from './PausePath.svelte';
-	import Icon from './Icon.svelte';
+	import Icon from '../lib/icons/Icon.svelte';
 
 	export let mindId: string;
 	export let active: boolean;

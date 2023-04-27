@@ -1,6 +1,6 @@
 <script lang="ts">
 	import CloudPath from './CloudPath.svelte';
-	import Icon from './Icon.svelte';
+	import Icon from '../lib/icons/Icon.svelte';
 </script>
 
 <a href="/" class="flex items-center text-gray-800 hover:text-gray-950">

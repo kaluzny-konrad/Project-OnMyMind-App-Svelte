@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { toggleCompleteInStore } from './mindStore';
-	import type Mind from './mind';
+	import type Mind from './Mind';
 	import CompletePath from './CompletePath.svelte';
-	import Icon from './Icon.svelte';
+	import Icon from '../lib/icons/Icon.svelte';
 	import { stopTimerInStore } from './timerStore';
 
 	export let mind: Mind;
