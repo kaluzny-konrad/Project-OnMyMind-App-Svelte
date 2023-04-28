@@ -46,7 +46,6 @@ export const getPomodoroFromStore = (): Pomodoro | null => {
 			pomodoro.isRunning = false;
 		}
 	});
-	console.log(pomodoro);
 	return pomodoro;
 };
 
