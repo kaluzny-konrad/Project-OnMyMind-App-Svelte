@@ -9,7 +9,7 @@
 	}
 </script>
 
-<label for={`${mind.id}-checkbox`} class="sr-only">Edit mind</label>
+<label for={`${mind.id}-checkbox`} class="sr-only">Edytuj zadanie</label>
 <input
 	id={`${mind.id}-checkbox`}
 	type="text"

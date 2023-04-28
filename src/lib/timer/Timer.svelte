@@ -46,17 +46,19 @@
 	<TimeVizualizer {time} />
 	{#if active}
 		{#if isRunning}
-			<button class="round-button gray-button" on:click={pauseTimer}
-				><Icon>
+			<button class="round-button gray-button" on:click={pauseTimer}>
+				<span class="sr-only">Zatrzymaj Licznik Czasu</span>
+				<Icon>
 					<PausePath />
-				</Icon></button
-			>
+				</Icon>
+			</button>
 		{:else}
-			<button class="round-button blue-button" on:click={startTimer}
-				><Icon>
+			<button class="round-button blue-button" on:click={startTimer}>
+				<span class="sr-only">Uruchom Licznik Czasu</span>
+				<Icon>
 					<StartPath />
-				</Icon></button
-			>
+				</Icon>
+			</button>
 		{/if}
 	{/if}
 </div>

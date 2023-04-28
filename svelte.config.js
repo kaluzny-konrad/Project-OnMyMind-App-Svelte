@@ -4,9 +4,10 @@ import { vitePreprocess } from '@sveltejs/kit/vite';
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
 	preprocess: vitePreprocess(),
+
 	kit: {
-		adapter: vercel(),
-	},
+		adapter: vercel()
+	}
 };
 
 export default config;

@@ -108,12 +108,14 @@
 			<TimeVizualizer time={remainingTime} />
 			{#if isRunning}
 				<button class="round-button gray-button" on:click={pausePomodoro}>
+					<span class="sr-only">Zatrzymaj Pomodoro</span>
 					<Icon>
 						<PausePath />
 					</Icon>
 				</button>
 			{:else}
 				<button class="round-button blue-button" on:click={startPomodoro}>
+					<span class="sr-only">Uruchom Pomodoro</span>
 					<Icon>
 						<StartPath />
 					</Icon>
@@ -136,6 +138,7 @@
 				>
 			{:else}
 				<button class="round-button red-button" on:click={resetPomodoro}>
+					<span class="sr-only">Zresetuj Pomodoro</span>
 					<Icon>
 						<ResetPath />
 					</Icon>
