@@ -24,6 +24,7 @@ pomodoros.subscribe((value: Pomodoro[]) => {
 });
 
 export const addPomodoroToStore = (maxTime: number): Pomodoro => {
+	if (maxTime < 0) maxTime = 60;
 	let pomodoro: Pomodoro = {
 		id: uuidv4(),
 		isRunning: false,
@@ -40,7 +41,12 @@ export const getPomodoroFromStore = (): Pomodoro | null => {
 	let pomodoro: Pomodoro | null = null;
 	pomodoros.subscribe((currentPomodoros: Pomodoro[]) => {
 		pomodoro = currentPomodoros.find(() => true) as Pomodoro;
+		if (pomodoro?.remainingTime < 0) {
+			pomodoro.remainingTime = 0;
+			pomodoro.isRunning = false;
+		}
 	});
+	console.log(pomodoro);
 	return pomodoro;
 };
 
@@ -75,6 +81,10 @@ export const updatePomodoroTimeInStore = (): void => {
 			if (pomodoro.isRunning) {
 				if (pomodoro.remainingTime === 1) pomodoro.isRunning = false;
 				pomodoro.remainingTime -= 1;
+				if (pomodoro.remainingTime < 0) {
+					pomodoro.remainingTime = 0;
+					pomodoro.isRunning = false;
+				}
 			}
 		});
 		return pomodoros;

@@ -2,12 +2,7 @@ import { v4 as uuidv4 } from 'uuid';
 import type { Writable } from 'svelte/store';
 import { writable } from 'svelte/store';
 import { browser } from '$app/environment';
-
-interface Mind {
-	id: string;
-	name: string;
-	isComplete: boolean;
-}
+import type Mind from './Mind';
 
 const storageName = 'minds-list';
 

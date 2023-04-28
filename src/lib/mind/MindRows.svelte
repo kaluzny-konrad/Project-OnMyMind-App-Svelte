@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type Mind from './mind';
+	import type Mind from './Mind';
 	import MindRow from './MindRow.svelte';
 
 	export let minds: Mind[];

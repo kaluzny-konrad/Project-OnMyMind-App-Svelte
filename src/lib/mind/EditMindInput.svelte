@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { changeMindNameInStore } from './mindStore';
-	import type Mind from './mind';
+	import type Mind from './Mind';
 
 	export let mind: Mind;
 
@@ -9,7 +9,7 @@
 	}
 </script>
 
-<label for={`${mind.id}-checkbox`} class="sr-only">Edit mind</label>
+<label for={`${mind.id}-checkbox`} class="sr-only">Edytuj zadanie</label>
 <input
 	id={`${mind.id}-checkbox`}
 	type="text"

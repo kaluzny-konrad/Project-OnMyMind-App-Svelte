@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { deleteMindFromStore } from './mindStore';
-	import type Mind from './mind';
-	import DeletePath from './DeletePath.svelte';
-	import Icon from './Icon.svelte';
-	import { deleteTimerFromStore } from './timerStore';
+	import type Mind from './Mind';
+	import DeletePath from '../icons/DeletePath.svelte';
+	import Icon from '../icons/Icon.svelte';
+	import { deleteTimerFromStore } from '../timer/timerStore';
 
 	export let mind: Mind;
 
@@ -18,6 +18,6 @@
 	on:click={() => deleteMind()}
 	class="round-button red-button"
 >
-	<span class="sr-only">Delete</span>
+	<span class="sr-only">Usuń zadanie</span>
 	<Icon><DeletePath /></Icon>
 </button>

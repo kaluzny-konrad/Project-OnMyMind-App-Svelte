@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { toggleCompleteInStore } from './mindStore';
-	import type Mind from './mind';
-	import CompletePath from './CompletePath.svelte';
-	import Icon from './Icon.svelte';
-	import { stopTimerInStore } from './timerStore';
+	import type Mind from './Mind';
+	import CompletePath from '../icons/CompletePath.svelte';
+	import Icon from '../icons/Icon.svelte';
+	import { stopTimerInStore } from '../timer/timerStore';
 
 	export let mind: Mind;
 
@@ -18,6 +18,6 @@
 	on:click={() => toggleComplete()}
 	class="round-button green-button"
 >
-	<span class="sr-only">Complete</span>
+	<span class="sr-only">Ukończ zadanie</span>
 	<Icon><CompletePath /></Icon>
 </button>

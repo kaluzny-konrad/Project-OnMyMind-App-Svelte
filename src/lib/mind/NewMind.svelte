@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { addMindToStore } from './mindStore.js';
-	import Icon from './Icon.svelte';
-	import AddPath from './AddPath.svelte';
-	import TimeSum from './TimeSum.svelte';
-	import { addTimerToStore, startTimerInStore } from './timerStore';
+	import Icon from '../icons/Icon.svelte';
+	import AddPath from '../icons/AddPath.svelte';
+	import TimeSum from '../timer/TimeSum.svelte';
+	import { addTimerToStore, startTimerInStore } from '../timer/timerStore';
 
 	function addMind() {
 		const mindInput = document.getElementById('mind-input') as HTMLInputElement;
@@ -16,9 +16,9 @@
 </script>
 
 <div class="wide-component">
-	<div class="wide-component-title">Nowa sprawa</div>
+	<div class="wide-component-title">Nowe zadanie</div>
 	<div class="wide-row">
-		<label for="mind-input" class="sr-only">Nowa sprawa</label>
+		<label for="mind-input" class="sr-only">Nowe zadanie</label>
 		<input
 			type="text"
 			id="mind-input"
@@ -26,6 +26,7 @@
 			class="input-text"
 		/>
 		<button type="button" on:click={addMind} class="round-button blue-button">
+			<span class="sr-only">Dodaj zadanie</span>
 			<Icon><AddPath /></Icon>
 		</button>
 

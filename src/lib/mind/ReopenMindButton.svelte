@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { toggleCompleteInStore } from './mindStore';
-	import type Mind from './mind';
-	import ResetPath from './ResetPath.svelte';
-	import Icon from './Icon.svelte';
+	import type Mind from './Mind';
+	import ResetPath from '../icons/ResetPath.svelte';
+	import Icon from '../icons/Icon.svelte';
 
 	export let mind: Mind;
 
@@ -16,6 +16,6 @@
 	on:click={() => toggleComplete()}
 	class="round-button gray-button"
 >
-	<span class="sr-only">Re-open</span>
+	<span class="sr-only">Ponownie otwórz zadanie</span>
 	<Icon><ResetPath /></Icon>
 </button>
