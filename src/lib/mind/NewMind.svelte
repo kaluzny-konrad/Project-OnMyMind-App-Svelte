@@ -13,6 +13,12 @@
 		startTimerInStore(id);
 		mindInput.value = '';
 	}
+
+	function keydownOnInput(event: KeyboardEvent) {
+		if (event.key === 'Enter') {
+			addMind();
+		}
+	}
 </script>
 
 <div class="wide-component">
@@ -22,6 +28,7 @@
 		<input
 			type="text"
 			id="mind-input"
+			on:keydown={keydownOnInput}
 			placeholder="Teraz zajmę się..."
 			class="input-text"
 		/>
