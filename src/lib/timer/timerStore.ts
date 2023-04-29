@@ -1,91 +1,89 @@
 import type { Writable } from 'svelte/store';
 import { writable } from 'svelte/store';
 import { browser } from '$app/environment';
-
-export default interface Timer {
-	mindId: string;
-	isRunning: boolean;
-	time: number;
-}
+import MindTimer from './MindTimer';
 
 const storageName = 'timers-list';
 
-const data: Timer[] = browser
+const data: MindTimer[] = browser
 	? JSON.parse(window.localStorage.getItem(storageName) as string) ?? []
 	: [];
 
-export const timers: Writable<Timer[]> = writable(data);
+export const timers: Writable<MindTimer[]> = writable(data);
 
-timers.subscribe((value: Timer[]) => {
+timers.subscribe((value: MindTimer[]) => {
 	if (browser) {
 		localStorage.setItem(storageName, JSON.stringify(value));
 	}
 });
 
-export const addTimerToStore = (mindId: string): Timer => {
-	let timer: Timer = {
-		mindId: mindId,
-		isRunning: false,
-		time: 0,
-	};
+export const addTimerToStore = (mindId: string): MindTimer => {
+	let timer: MindTimer = new MindTimer(mindId);
 
-	timers.update((currentTimers: Timer[]) => {
+	timers.update((currentTimers: MindTimer[]) => {
 		return [...currentTimers, timer];
 	});
 	return timer;
 };
 
-export const getTimerFromStore = (mindId: string): Timer | null => {
-	let timer: Timer | null = null;
-	timers.subscribe((currentTimers: Timer[]) => {
+export const getTimerFromStore = (mindId: string): MindTimer | null => {
+	let timer: MindTimer | null = null;
+	timers.subscribe((currentTimers: MindTimer[]) => {
 		timer = currentTimers.find(
-			(timer: Timer) => timer.mindId === mindId,
-		) as Timer;
+			(timer: MindTimer) => timer.mindId === mindId,
+		) as MindTimer;
 	});
 	return timer;
 };
 
 export const deleteTimerFromStore = (mindId: string): void => {
-	timers.update((currentTimers: Timer[]) => {
-		return currentTimers.filter((timer: Timer) => timer.mindId !== mindId);
+	timers.update((currentTimers: MindTimer[]) => {
+		return currentTimers.filter((timer: MindTimer) => timer.mindId !== mindId);
 	});
 };
 
 export const startTimerInStore = (mindId: string): void => {
 	timers.update((timers) => {
-		timers.forEach((timer) => (timer.isRunning = false));
-		const timer = timers.find((timer) => timer.mindId === mindId);
-		if (!timer) return timers;
-		timer.isRunning = true;
+		timers.forEach((timer) => timer.pause());
+		timers.find((timer) => timer.mindId === mindId)?.start();
+
 		return timers;
 	});
 };
 
 export const stopTimerInStore = (mindId: string): void => {
 	timers.update((timers) => {
-		const timer = timers.find((timer) => timer.mindId === mindId);
-		if (timer) timer.isRunning = false;
+		timers.find((timer) => timer.mindId === mindId)?.pause();
 		return timers;
 	});
 };
 
-export const updateTimerTimeInStore = (): void => {
-	timers.update((timers) => {
-		timers.forEach((timer) => {
-			if (timer?.isRunning) timer.time = timer.time + 1;
-		});
-		return timers;
+export const getTimerTimeElapsed = (mindId: string): number => {
+	let timeElapsed: number = 0;
+	timers.subscribe((currentTimers: MindTimer[]) => {
+		timeElapsed = currentTimers
+			.find((timer: MindTimer) => timer.mindId === mindId)
+			?.getTimeElapsed() as number;
 	});
+	return timeElapsed;
 };
 
-setInterval(updateTimerTimeInStore, 1000);
+export const getTimerIsRunning = (mindId: string): boolean => {
+	let isRunning: boolean = true;
+	timers.subscribe((currentTimers: MindTimer[]) => {
+		isRunning = currentTimers
+			.find((timer: MindTimer) => timer.mindId === mindId)
+			?.isRunning() as boolean;
+	});
+	return isRunning;
+};
 
-export const getSumOfCountedTime = (): number => {
-	let sum = 0;
-	timers.subscribe((currentTimers: Timer[]) => {
-		currentTimers.forEach((timer) => {
-			sum += timer.time;
-		});
+export const getTimersTimeElapsedSum = (): number => {
+	let sum: number = 0;
+	timers.subscribe((currentTimers: MindTimer[]) => {
+		sum = currentTimers.reduce((sum: number, timer: MindTimer) => {
+			return sum + timer.getTimeElapsed();
+		}, 0);
 	});
 	return sum;
 };

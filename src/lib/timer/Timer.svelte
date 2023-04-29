@@ -6,7 +6,7 @@
 		startTimerInStore,
 		stopTimerInStore,
 	} from './timerStore';
-	import type Timer from './timerStore';
+	import type MindTimer from './MindTimer';
 	import TimeVizualizer from './TimeVizualizer.svelte';
 
 	import StartPath from '../icons/StartPath.svelte';
@@ -15,7 +15,7 @@
 
 	export let mindId: string;
 	export let active: boolean;
-	let timer: Timer;
+	let timer: MindTimer;
 	let interval: NodeJS.Timer;
 	$: isRunning = false;
 	$: time = 0;
@@ -23,8 +23,13 @@
 	onMount(() => {
 		timer = getTimerFromStore(mindId) ?? addTimerToStore(mindId);
 		refreshTimer();
-		interval = setInterval(refreshTimer, 1);
+		loop();
 	});
+
+	function loop() {
+		refreshTimer();
+		window.requestAnimationFrame(loop);
+	}
 
 	function startTimer() {
 		startTimerInStore(mindId);
@@ -37,8 +42,8 @@
 	}
 
 	function refreshTimer() {
-		isRunning = timer.isRunning;
-		time = timer.time;
+		isRunning = timer.isRunning();
+		time = timer.getTimeElapsed();
 	}
 </script>
 
