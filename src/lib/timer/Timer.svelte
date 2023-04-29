@@ -23,13 +23,8 @@
 	onMount(() => {
 		timer = getTimerFromStore(mindId) ?? addTimerToStore(mindId);
 		refreshTimer();
-		loop();
+		interval = setInterval(refreshTimer, 1);
 	});
-
-	function loop() {
-		refreshTimer();
-		window.requestAnimationFrame(loop);
-	}
 
 	function startTimer() {
 		startTimerInStore(mindId);
@@ -42,7 +37,7 @@
 	}
 
 	function refreshTimer() {
-		isRunning = timer.isRunning();
+		isRunning = timer.isRunning;
 		time = timer.getTimeElapsed();
 	}
 </script>
