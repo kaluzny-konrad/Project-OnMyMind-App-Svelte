@@ -52,7 +52,7 @@ describe('Timers Store', () => {
 		const timer = addTimerToStore('mindId');
 		deleteTimerFromStore('mindId');
 		const foundTimer = getTimerFromStore('mindId');
-		expect(foundTimer).toBeUndefined();
+		expect(foundTimer).toBeNull();
 	});
 
 	test('Starting a timer in the store', () => {

@@ -28,12 +28,10 @@
 
 	function startTimer() {
 		startTimerInStore(mindId);
-		refreshTimer();
 	}
 
 	function pauseTimer() {
 		stopTimerInStore(mindId);
-		refreshTimer();
 	}
 
 	function refreshTimer() {

@@ -44,7 +44,8 @@ export const getTimerFromStore = (mindId: string): MindTimer | null => {
 			(timer: MindTimer) => timer?.mindId === mindId,
 		) as MindTimer;
 	});
-	return timer;
+	if (timer) return timer;
+	return null;
 };
 
 export const deleteTimerFromStore = (mindId: string): void => {
@@ -55,7 +56,7 @@ export const deleteTimerFromStore = (mindId: string): void => {
 
 export const startTimerInStore = (mindId: string): void => {
 	timers.update((timers) => {
-		timers.forEach((timer) => timer?.pause());
+		timers.forEach((timer) => timer?.stop());
 		timers.find((timer) => timer?.mindId === mindId)?.start();
 
 		return timers;
@@ -64,7 +65,7 @@ export const startTimerInStore = (mindId: string): void => {
 
 export const stopTimerInStore = (mindId: string): void => {
 	timers.update((timers) => {
-		timers.find((timer) => timer?.mindId === mindId)?.pause();
+		timers.find((timer) => timer?.mindId === mindId)?.stop();
 		return timers;
 	});
 };

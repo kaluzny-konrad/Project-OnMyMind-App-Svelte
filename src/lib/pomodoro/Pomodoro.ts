@@ -1,11 +1,11 @@
-export default class MindTimer {
-	mindId: string;
+export default class Pomodoro {
 	isRunning: boolean;
 	startTime: number;
 	beforeElapsedTime: number;
+	maxTime: number;
 
-	constructor(mindId: string) {
-		this.mindId = mindId;
+	constructor(maxTime: number) {
+		this.maxTime = maxTime;
 		this.startTime = Date.now();
 		this.beforeElapsedTime = 0;
 		this.isRunning = false;
@@ -27,13 +27,18 @@ export default class MindTimer {
 		}
 	}
 
-	public getTimeElapsed(): number {
+	public getRemainingTime(): number {
 		let nowElapsedTime = 0;
 		if (this.isRunning) {
 			const now = Date.now();
 			nowElapsedTime = now - this.startTime;
 		}
 		let milliseconds = nowElapsedTime + this.beforeElapsedTime;
-		return milliseconds;
+		let remainingTime = this.maxTime - milliseconds;
+		if (remainingTime <= 0) {
+			remainingTime = 0;
+			this.isRunning = false;
+		}
+		return remainingTime;
 	}
 }

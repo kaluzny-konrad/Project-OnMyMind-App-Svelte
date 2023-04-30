@@ -14,84 +14,62 @@
 		startPomodoroInStore,
 		stopPomodoroInStore,
 	} from './pomodoroStore';
-	import type Pomodoro from './pomodoroStore';
+	import type Pomodoro from './Pomodoro';
 
-	const MAX_TIME = 15 * 60;
+	const MAX_TIME = 15 * 60 * 1000;
+	let pomodoro: Pomodoro | null = null;
 	let interval: NodeJS.Timer;
-	let pomodoro: Pomodoro;
-	let isStopped = true;
-	$: isLoaded = false;
+	$: chosenTime = MAX_TIME;
+	$: remainingTime = chosenTime;
 	$: isRunning = false;
-	let maxTime = MAX_TIME;
-	$: remainingTime = maxTime;
 
 	onMount(() => {
-		pomodoro = getPomodoroFromStore() ?? addPomodoroToStore(maxTime);
-		isRunning = pomodoro.isRunning;
-		remainingTime = pomodoro.remainingTime;
-		isStopped = !pomodoro.isRunning;
-		maxTime = Math.floor(pomodoro.remainingTime / 60) * 60;
-		if (isStopped) {
-			pomodoro.remainingTime = MAX_TIME;
-			remainingTime = MAX_TIME;
-		}
-		refreshPomodoro();
+		pomodoro = getPomodoroFromStore();
 		interval = setInterval(refreshPomodoro, 1);
 		audio = new Audio(audioUrl);
 		audio.addEventListener('ended', () => resetAudio());
-		isLoaded = true;
 	});
 
+	function addPomodoroToStoreIfNotExists() {
+		return getPomodoroFromStore() ?? addPomodoroToStore(chosenTime);
+	}
+
 	function startPomodoro() {
-		if (isLoaded) {
-			if (pomodoro.remainingTime === 0) resetPomodoro();
-			if (isStopped) {
-				deletePomodoroFromStore(pomodoro.id);
-				pomodoro = addPomodoroToStore(maxTime);
-			}
-			startPomodoroInStore(pomodoro.id);
-			isStopped = false;
-			refreshPomodoro();
-		}
+		if (!pomodoro) resetAudio();
+		pomodoro = addPomodoroToStoreIfNotExists();
+		startPomodoroInStore();
 	}
 
 	function pausePomodoro() {
-		if (isLoaded) {
-			stopPomodoroInStore(pomodoro.id);
-			refreshPomodoro();
+		stopPomodoroInStore();
+	}
+
+	function refreshPomodoro() {
+		if (!pomodoro) return;
+		const wasRunning = isRunning;
+		isRunning = pomodoro.isRunning;
+		remainingTime = pomodoro.getRemainingTime();
+		if (remainingTime <= 0 && wasRunning) {
+			audio.play();
+			deletePomodoro();
 		}
 	}
 
+	function deletePomodoro() {
+		remainingTime = chosenTime;
+		deletePomodoroFromStore();
+		pomodoro = null;
+		isRunning = false;
+	}
+
 	function resetPomodoro() {
-		if (isLoaded) {
-			deletePomodoroFromStore(pomodoro.id);
-			resetAudio();
-			pomodoro = addPomodoroToStore(maxTime);
-			refreshPomodoro();
-			isStopped = true;
-		}
+		deletePomodoro();
+		resetAudio();
 	}
 
 	function resetAudio() {
 		audio.pause();
 		audio.currentTime = 0;
-	}
-
-	function refreshPomodoro() {
-		if (isLoaded && !isStopped) {
-			let wasRunning = isRunning;
-			isRunning = pomodoro.isRunning;
-			remainingTime = pomodoro.remainingTime;
-
-			if (
-				wasRunning &&
-				!isRunning &&
-				remainingTime === 0 &&
-				audio.paused === true
-			) {
-				audio.play();
-			}
-		}
 	}
 
 	onDestroy(() => {
@@ -102,48 +80,43 @@
 	const audioUrl = '/sounds/alarm.mp3';
 </script>
 
-{#if isLoaded}
-	<div class="wide-component">
-		<div class="wide-row">
-			<TimeVizualizer time={remainingTime} />
-			{#if isRunning}
-				<button class="round-button gray-button" on:click={pausePomodoro}>
-					<span class="sr-only">Zatrzymaj Pomodoro</span>
-					<Icon>
-						<PausePath />
-					</Icon>
-				</button>
-			{:else}
-				<button class="round-button blue-button" on:click={startPomodoro}>
-					<span class="sr-only">Uruchom Pomodoro</span>
-					<Icon>
-						<StartPath />
-					</Icon>
-				</button>
-			{/if}
+<div class="wide-component">
+	<div class="wide-row">
+		<TimeVizualizer time={remainingTime} />
 
-			{#if isStopped}
-				<input
-					type="range"
-					class="slider"
-					id="pomodoroMaxTime"
-					min={1}
-					max={60 * 60}
-					step="1"
-					bind:value={maxTime}
-					disabled={isRunning}
-				/>
-				<label for="pomodoroMaxTime" class="sr-only"
-					>{maxTime / 60} minutes</label
-				>
-			{:else}
-				<button class="round-button red-button" on:click={resetPomodoro}>
-					<span class="sr-only">Zresetuj Pomodoro</span>
-					<Icon>
-						<ResetPath />
-					</Icon>
-				</button>
-			{/if}
-		</div>
+		{#if isRunning}
+			<button class="round-button gray-button" on:click={pausePomodoro}>
+				<span class="sr-only">Zatrzymaj Pomodoro</span>
+				<Icon>
+					<PausePath />
+				</Icon>
+			</button>
+		{:else}
+			<button class="round-button blue-button" on:click={startPomodoro}>
+				<span class="sr-only">Uruchom Pomodoro</span>
+				<Icon>
+					<StartPath />
+				</Icon>
+			</button>
+		{/if}
+		<button class="round-button red-button" on:click={resetPomodoro}>
+			<span class="sr-only">Zresetuj Pomodoro</span>
+			<Icon>
+				<ResetPath />
+			</Icon>
+		</button>
+		<input
+			type="range"
+			class="slider"
+			id="pomodoroMaxTime"
+			min={60 * 5 * 1000}
+			max={45 * 60 * 1000}
+			step={60 * 5 * 1000}
+			bind:value={chosenTime}
+			disabled={pomodoro != null}
+		/>
+		<label for="pomodoroMaxTime" class="sr-only"
+			>{chosenTime / 60 / 1000} minutes</label
+		>
 	</div>
-{/if}
+</div>

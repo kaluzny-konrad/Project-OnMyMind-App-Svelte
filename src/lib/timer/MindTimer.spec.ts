@@ -26,9 +26,9 @@ describe('MindTimer', () => {
 		expect(timer.isRunning).toBe(true);
 	});
 
-	it('pauses timer correctly', () => {
+	it('stops timer correctly', () => {
 		timer.start();
-		timer.pause();
+		timer.stop();
 		expect(timer.isRunning).toBe(false);
 	});
 
@@ -40,30 +40,30 @@ describe('MindTimer', () => {
 		expect(timer.getTimeElapsed()).toBe(expectedTime);
 	});
 
-	it('returns correct getTimeElapsed() when timer is paused', async () => {
+	it('returns correct getTimeElapsed() when timer is stoped', async () => {
 		const expectedTime = 5000;
 		timer.start();
 		vi.advanceTimersByTime(expectedTime);
-		timer.pause();
+		timer.stop();
 		expect(timer.isRunning).toBe(false);
 		expect(timer.getTimeElapsed()).toBe(expectedTime);
 	});
 
-	it('returns correct getTimeElapsed() when timer is paused some time', async () => {
+	it('returns correct getTimeElapsed() when timer is stoped some time', async () => {
 		const expectedTime = 5000;
 		timer.start();
 		vi.advanceTimersByTime(expectedTime);
-		timer.pause();
+		timer.stop();
 		vi.advanceTimersByTime(expectedTime);
 		expect(timer.isRunning).toBe(false);
 		expect(timer.getTimeElapsed()).toBe(expectedTime);
 	});
 
-	it('returns correct getTimeElapsed() when timer is paused and started again', async () => {
+	it('returns correct getTimeElapsed() when timer is stoped and started again', async () => {
 		const expectedTime = 5000;
 		timer.start();
 		vi.advanceTimersByTime(expectedTime);
-		timer.pause();
+		timer.stop();
 		vi.advanceTimersByTime(expectedTime);
 		timer.start();
 		vi.advanceTimersByTime(expectedTime);
