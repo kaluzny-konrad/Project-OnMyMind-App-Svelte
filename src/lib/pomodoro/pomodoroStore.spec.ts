@@ -103,4 +103,8 @@ describe('PomodoroStore', () => {
 		const pomodoro = addPomodoroToStore(-maxTime);
 		expect(pomodoro.getRemainingTime()).toBe(standardMaxTime);
 	});
+
+	it('should create writable object', () => {
+		expect(pomodoros).not.toBe(null);
+	});
 });
