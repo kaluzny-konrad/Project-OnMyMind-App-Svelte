@@ -1,12 +1,12 @@
 <script lang="ts">
 	import { onMount, onDestroy } from 'svelte';
-	import { getSumOfCountedTime } from './timerStore';
-	import TimeVizualizer from './TimeVizualizer.svelte';
+	import { getTimersTimeElapsedSum } from './timerStore';
+	import TimeVizualizer from '../common/TimeVizualizer.svelte';
 
 	$: time = 0;
 
 	function refreshSum() {
-		time = getSumOfCountedTime();
+		time = getTimersTimeElapsedSum();
 	}
 
 	let interval: NodeJS.Timer;

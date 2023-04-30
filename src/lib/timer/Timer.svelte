@@ -6,8 +6,8 @@
 		startTimerInStore,
 		stopTimerInStore,
 	} from './timerStore';
-	import type Timer from './timerStore';
-	import TimeVizualizer from './TimeVizualizer.svelte';
+	import type MindTimer from './MindTimer';
+	import TimeVizualizer from '../common/TimeVizualizer.svelte';
 
 	import StartPath from '../icons/StartPath.svelte';
 	import PausePath from '../icons/PausePath.svelte';
@@ -15,7 +15,7 @@
 
 	export let mindId: string;
 	export let active: boolean;
-	let timer: Timer;
+	let timer: MindTimer;
 	let interval: NodeJS.Timer;
 	$: isRunning = false;
 	$: time = 0;
@@ -28,17 +28,15 @@
 
 	function startTimer() {
 		startTimerInStore(mindId);
-		refreshTimer();
 	}
 
 	function pauseTimer() {
 		stopTimerInStore(mindId);
-		refreshTimer();
 	}
 
 	function refreshTimer() {
 		isRunning = timer.isRunning;
-		time = timer.time;
+		time = timer.getTimeElapsed();
 	}
 </script>
 
