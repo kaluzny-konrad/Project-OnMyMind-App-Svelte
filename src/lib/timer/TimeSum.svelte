@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onMount, onDestroy } from 'svelte';
 	import { getTimersTimeElapsedSum } from './timerStore';
-	import TimeVizualizer from './TimeVizualizer.svelte';
+	import TimeVizualizer from '../common/TimeVizualizer.svelte';
 
 	$: time = 0;
 

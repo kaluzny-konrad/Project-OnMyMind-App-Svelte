@@ -7,7 +7,7 @@
 		stopTimerInStore,
 	} from './timerStore';
 	import type MindTimer from './MindTimer';
-	import TimeVizualizer from './TimeVizualizer.svelte';
+	import TimeVizualizer from '../common/TimeVizualizer.svelte';
 
 	import StartPath from '../icons/StartPath.svelte';
 	import PausePath from '../icons/PausePath.svelte';

@@ -5,7 +5,7 @@
 	import StartPath from '../icons/StartPath.svelte';
 	import PausePath from '../icons/PausePath.svelte';
 	import ResetPath from '../icons/ResetPath.svelte';
-	import TimeVizualizer from './TimeVizualizer.svelte';
+	import TimeVizualizer from '../common/TimeVizualizer.svelte';
 
 	import {
 		addPomodoroToStore,
