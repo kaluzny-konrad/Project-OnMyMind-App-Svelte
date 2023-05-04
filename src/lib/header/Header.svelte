@@ -5,11 +5,11 @@
 
 <header class="mb-4">
 	<nav class="bg-white shadow">
-		<div class="container">
+		<div class="container m-auto">
 			<div class="flex items-center justify-between">
 				<Logo />
 				<div class="flex">
-					<NavElement name="About" href="/about" />
+					<NavElement name="Home" href="/" />
 				</div>
 			</div>
 		</div>
