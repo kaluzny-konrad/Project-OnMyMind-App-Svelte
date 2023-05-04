@@ -22,7 +22,7 @@
 	}
 
 	.round-button {
-		@apply rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-opacity-50;
+		@apply rounded-md px-4 py-2 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-opacity-50;
 	}
 	.blue-button {
 		@apply bg-blue-500 text-white hover:bg-blue-600 focus:ring-blue-400;
@@ -35,5 +35,21 @@
 	}
 	.gray-button {
 		@apply bg-gray-500 text-white hover:bg-gray-600 focus:ring-gray-400;
+	}
+
+	.text-link {
+		@apply text-gray-600 hover:text-gray-900;
+	}
+
+	.main-color {
+		color: #bb2649;
+	}
+
+	.mix-color {
+		color: #ce3f44;
+	}
+
+	.second-color {
+		color: #e2583e;
 	}
 }
