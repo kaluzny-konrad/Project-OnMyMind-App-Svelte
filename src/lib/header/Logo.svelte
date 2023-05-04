@@ -1,10 +1,10 @@
-<script lang="ts">
-	import Icon from '$lib/icons/Icon.svelte';
-	import QueuePath from '$lib/icons/QueuePath.svelte';
-	import SquaresPath from '$lib/icons/SquaresPath.svelte';
-</script>
-
-<a href="/" class="flex items-center text-gray-800 hover:text-gray-950">
-	<Icon strokeWidth={2.0}><SquaresPath /></Icon>
-	<span class="ml-2 text-2xl font-bold">OnMyMind</span>
+<a href="/" class="flex items-center text-gray-800 hover:text-gray-900">
+	<img src="/logo-color.svg" alt="OnMyMind" class="h-12" />
+	<span class="logo-font ml-3 text-4xl font-bold">OnMyMind</span>
 </a>
+
+<style>
+	.logo-font {
+		font-family: 'Roboto Black', sans-serif;
+	}
+</style>
