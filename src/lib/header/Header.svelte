@@ -3,14 +3,12 @@
 	import NavElement from './NavElement.svelte';
 </script>
 
-<header class="mb-4">
-	<nav class="bg-white shadow">
-		<div class="container m-auto">
-			<div class="flex items-center justify-between">
-				<Logo />
-				<div class="flex">
-					<NavElement name="Home" href="/" />
-				</div>
+<header class="sticky top-0 z-50 mb-4 bg-white shadow">
+	<nav class="container mx-auto">
+		<div class="flex items-center justify-between">
+			<Logo />
+			<div class="flex">
+				<NavElement name="Home" href="/" />
 			</div>
 		</div>
 	</nav>
