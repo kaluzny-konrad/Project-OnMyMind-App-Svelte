@@ -2,6 +2,7 @@
 	import '../app.css';
 	import './styles.css';
 	import Header from '../lib/header/Header.svelte';
+	import Footer from '../lib/footer/Footer.svelte';
 </script>
 
 <Header />
@@ -12,8 +13,10 @@
 	</main>
 </div>
 
+<Footer />
+
 <style>
 	.app {
-		min-height: calc(100vh - 7rem);
+		min-height: calc(100vh);
 	}
 </style>
