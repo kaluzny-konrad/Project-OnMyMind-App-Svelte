@@ -9,6 +9,6 @@
 
 <NewMind />
 
-<MindRows minds={openMinds} title="Rozpoczęte zadania" />
+<MindRows minds={openMinds} title="In progress" />
 
-<MindRows minds={closedMinds} title="Zakończone zadania" />
+<MindRows minds={closedMinds} title="Completed" />

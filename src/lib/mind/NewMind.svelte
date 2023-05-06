@@ -22,18 +22,17 @@
 </script>
 
 <div class="wide-component">
-	<div class="wide-component-title">Nowe zadanie</div>
 	<div class="wide-row">
-		<label for="mind-input" class="sr-only">Nowe zadanie</label>
+		<label for="mind-input" class="sr-only">New task</label>
 		<input
 			type="text"
 			id="mind-input"
 			on:keydown={keydownOnInput}
-			placeholder="Teraz zajmę się..."
+			placeholder="On my mind is..."
 			class="input-text"
 		/>
 		<button type="button" on:click={addMind} class="round-button blue-button">
-			<span class="sr-only">Dodaj zadanie</span>
+			<span class="sr-only">Add task</span>
 			<Icon><AddPath /></Icon>
 		</button>
 

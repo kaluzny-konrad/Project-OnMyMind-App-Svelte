@@ -8,31 +8,31 @@
 		/>
 	</div>
 	<div class="flex flex-col items-center justify-center">
-		<h2 class="my-4 text-2xl font-bold">O aplikacji OnMyMind</h2>
+		<h2 class="my-4 text-2xl font-bold">About OnMyMind</h2>
 		<p class="m-4 text-center text-lg">
-			OnMyMind to prosty w obsłudze tracker, który umożliwia śledzenie wielu
-			zadań jednocześnie. Dzięki OnMyMind możesz śledzić postępy wszystkich
-			zadań w jednym miejscu i łatwiej zarządzać swoim czasem.
+			OnMyMind is an easy-to-use tracker that allows you to track multiple tasks
+			simultaneously. With OnMyMind, you can track the progress of all your
+			tasks in one place and better manage your time.
 		</p>
-		<h2 class="my-4 text-2xl font-bold">Jak działa OnMyMind?</h2>
+		<h2 class="my-4 text-2xl font-bold">How does OnMyMind work?</h2>
 		<p class="m-4 text-center text-lg">
-			Aplikacja umożliwia ustawienie czasomierza w systemie Pomodoro, aby
-			kontrolować czas pracy i przerw. Dodatkowo każde zadanie dodane do
-			OnMyMind wyposażone jest we własny czasomierz, który pozwala kontrolować
-			czas przeznaczony na jego wykonanie. Celem jest lepsze zarządzanie sobą w
-			czasie i organizację w trudnych warunkach.
+			The application allows you to set a timer in the Pomodoro system to
+			control your work and break times. Additionally, each task added to
+			OnMyMind is equipped with its own timer, which allows you to control the
+			time spent on its execution. The goal is to better manage your time and
+			organization in difficult conditions.
 		</p>
-		<h2 class="my-4 text-2xl font-bold">O rozwoju aplikacji</h2>
+		<h2 class="my-4 text-2xl font-bold">OnMyMind Development</h2>
 		<p class="m-4 text-center text-lg">
-			Rozwijam aplikację OnMyMind w celu zwiększenia efektywności mojej pracy, a
-			także dla innych osób pracujących w podobnych warunkach. Staram się stale
-			ulepszać funkcjonalność i wygląd aplikacji, aby zapewnić użytkownikom
-			najlepsze doświadczenia. W ciągu najbliższych miesięcy planuję dodanie
-			nowych funkcjonalności, takich jak:
+			I am developing OnMyMind to increase the efficiency of my work, as well as
+			for other people who work in similar conditions. I strive to constantly
+			improve the functionality and appearance of the application to provide
+			users with the best possible experience. In the coming months, I plan to
+			add new features such as:
 		</p>
 		<ul class="m-4 list-inside list-disc text-center text-lg">
-			<li>Możliwość łatwej zmiany kolejności aktywnych zadań.</li>
-			<li>Możliwość oznaczania priorytetu zadań.</li>
+			<li>The ability to easily change the order of active tasks.</li>
+			<li>The ability to mark task priorities.</li>
 		</ul>
 	</div>
 </div>
