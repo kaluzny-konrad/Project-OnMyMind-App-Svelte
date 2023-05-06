@@ -9,11 +9,11 @@
 	}
 </script>
 
-<label for={`${mind.id}-checkbox`} class="sr-only">Edytuj zadanie</label>
+<label for={`${mind.id}-checkbox`} class="sr-only">Edit task</label>
 <input
 	id={`${mind.id}-checkbox`}
 	type="text"
-	placeholder="Zajmuje się..."
+	placeholder="On my mind is..."
 	bind:value={mind.name}
 	on:input={() => nameChanged()}
 	class="input-text"

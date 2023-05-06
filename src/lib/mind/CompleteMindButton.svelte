@@ -18,6 +18,6 @@
 	on:click={() => toggleComplete()}
 	class="round-button green-button"
 >
-	<span class="sr-only">Ukończ zadanie</span>
+	<span class="sr-only">Complete task</span>
 	<Icon><CompletePath /></Icon>
 </button>

@@ -16,6 +16,6 @@
 	on:click={() => toggleComplete()}
 	class="round-button gray-button"
 >
-	<span class="sr-only">Ponownie otwórz zadanie</span>
+	<span class="sr-only">Reopen task</span>
 	<Icon><ResetPath /></Icon>
 </button>

@@ -45,14 +45,14 @@
 	{#if active}
 		{#if isRunning}
 			<button class="round-button gray-button" on:click={pauseTimer}>
-				<span class="sr-only">Zatrzymaj Licznik Czasu</span>
+				<span class="sr-only">Stop timer</span>
 				<Icon>
 					<PausePath />
 				</Icon>
 			</button>
 		{:else}
 			<button class="round-button blue-button" on:click={startTimer}>
-				<span class="sr-only">Uruchom Licznik Czasu</span>
+				<span class="sr-only">Run timer</span>
 				<Icon>
 					<StartPath />
 				</Icon>

@@ -9,6 +9,7 @@
 			<Logo />
 			<div class="flex">
 				<NavElement name="Home" href="/" />
+				<NavElement name="About" href="/about" />
 			</div>
 		</div>
 	</nav>
