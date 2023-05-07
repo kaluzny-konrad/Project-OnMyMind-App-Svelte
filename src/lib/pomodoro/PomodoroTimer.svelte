@@ -118,7 +118,6 @@
 			});
 			timeoutWorker.onmessage = () => {
 				endPomodoroSession();
-				console.log('TimeoutWorker ended pomodoro session');
 			};
 		}
 	}
@@ -126,7 +125,6 @@
 	function clearTimeoutWorker() {
 		if (timeoutWorker) {
 			timeoutWorker.terminate();
-			console.log('Terminated timeoutWorker');
 			timeoutWorker = null;
 		}
 	}
@@ -161,7 +159,7 @@
 			type="range"
 			class="slider"
 			id="pomodoroMaxTime"
-			min={60 * 1 * 1000}
+			min={60 * 5 * 1000}
 			max={45 * 60 * 1000}
 			step={60 * 5 * 1000}
 			bind:value={chosenTime}
