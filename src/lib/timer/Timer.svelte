@@ -16,18 +16,18 @@
 	export let mindId: string;
 	export let active: boolean;
 	let timer: MindTimer;
-	let interval: NodeJS.Timer;
 	$: isRunning = false;
 	$: time = 0;
 
 	onMount(() => {
 		timer = getTimerFromStore(mindId) ?? addTimerToStore(mindId);
 		refreshTimer();
-		interval = setInterval(refreshTimer, 1);
+		requestAnimationFrame(refreshTimer);
 	});
 
 	function startTimer() {
 		startTimerInStore(mindId);
+		requestAnimationFrame(refreshTimer);
 	}
 
 	function pauseTimer() {
@@ -37,6 +37,7 @@
 	function refreshTimer() {
 		isRunning = timer.isRunning;
 		time = timer.getTimeElapsed();
+		requestAnimationFrame(refreshTimer);
 	}
 </script>
 

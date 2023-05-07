@@ -18,41 +18,64 @@
 
 	const MAX_TIME = 15 * 60 * 1000;
 	let pomodoro: Pomodoro | null = null;
-	let interval: NodeJS.Timer;
 	$: chosenTime = MAX_TIME;
 	$: remainingTime = chosenTime;
 	$: isRunning = false;
 
 	onMount(() => {
 		pomodoro = getPomodoroFromStore();
-		interval = setInterval(refreshPomodoro, 1);
-		audio = new Audio(audioUrl);
-		audio.addEventListener('ended', () => resetAudio());
+		initAudio();
+		addVisibilityChangeListener();
+		requestAnimationFrame(updatePomodoro);
 	});
 
-	function addPomodoroToStoreIfNotExists() {
-		return getPomodoroFromStore() ?? addPomodoroToStore(chosenTime);
-	}
+	onDestroy(() => {
+		handlePausePomodoro();
+		removeVisibilityChangeListener();
+		clearTimeoutWorker();
+	});
 
-	function startPomodoro() {
+	// Handle Pomodoro action buttons
+	function handleStartPomodoro() {
 		if (!pomodoro) resetAudio();
 		pomodoro = addPomodoroToStoreIfNotExists();
 		startPomodoroInStore();
+		requestAnimationFrame(updatePomodoro);
 	}
 
-	function pausePomodoro() {
+	function handlePausePomodoro() {
 		stopPomodoroInStore();
 	}
 
-	function refreshPomodoro() {
+	function handleRestartPomodoro() {
+		deletePomodoro();
+		resetAudio();
+	}
+
+	// Pomodoro actions
+	function addPomodoroToStoreIfNotExists(): Pomodoro {
+		return getPomodoroFromStore() ?? addPomodoroToStore(chosenTime);
+	}
+
+	function updatePomodoro() {
 		if (!pomodoro) return;
-		const wasRunning = isRunning;
+		const wasRunning = pomodoro.isRunning;
 		isRunning = pomodoro.isRunning;
 		remainingTime = pomodoro.getRemainingTime();
+
 		if (remainingTime <= 0 && wasRunning) {
-			audio.play();
-			deletePomodoro();
+			endPomodoroSession();
 		}
+
+		if (isRunning) {
+			requestAnimationFrame(updatePomodoro);
+		}
+	}
+
+	function endPomodoroSession() {
+		audio.play();
+		clearTimeoutWorker();
+		deletePomodoro();
 	}
 
 	function deletePomodoro() {
@@ -62,9 +85,12 @@
 		isRunning = false;
 	}
 
-	function resetPomodoro() {
-		deletePomodoro();
-		resetAudio();
+	// Audio
+	let audio: HTMLAudioElement;
+	function initAudio() {
+		audio = new Audio('/sounds/alarm.mp3');
+		audio.volume = 0.1;
+		audio.addEventListener('ended', () => resetAudio());
 	}
 
 	function resetAudio() {
@@ -72,12 +98,46 @@
 		audio.currentTime = 0;
 	}
 
-	onDestroy(() => {
-		pausePomodoro();
-	});
+	// Visibility Listener
+	function addVisibilityChangeListener() {
+		if (typeof window !== 'undefined') {
+			document.addEventListener('visibilitychange', handleVisibilityChange);
+		}
+	}
 
-	let audio: HTMLAudioElement;
-	const audioUrl = '/sounds/alarm.mp3';
+	function handleVisibilityChange() {
+		if (document.hidden) {
+			setTimeoutWorker();
+		} else {
+			clearTimeoutWorker();
+		}
+	}
+
+	let timeoutWorker: Worker | null = null;
+	function setTimeoutWorker() {
+		if (pomodoro?.isRunning) {
+			timeoutWorker = new Worker('/workers/timeoutWorker.js');
+			timeoutWorker.postMessage({
+				delay: remainingTime + 1000,
+			});
+			timeoutWorker.onmessage = () => {
+				endPomodoroSession();
+			};
+		}
+	}
+
+	function clearTimeoutWorker() {
+		if (timeoutWorker) {
+			timeoutWorker.terminate();
+			timeoutWorker = null;
+		}
+	}
+
+	function removeVisibilityChangeListener() {
+		if (typeof window !== 'undefined') {
+			document.removeEventListener('visibilitychange', handleVisibilityChange);
+		}
+	}
 </script>
 
 <div class="wide-component">
@@ -85,21 +145,21 @@
 		<TimeVizualizer time={remainingTime} />
 
 		{#if isRunning}
-			<button class="round-button gray-button" on:click={pausePomodoro}>
+			<button class="round-button gray-button" on:click={handlePausePomodoro}>
 				<span class="sr-only">Stop Pomodoro</span>
 				<Icon>
 					<PausePath />
 				</Icon>
 			</button>
 		{:else}
-			<button class="round-button blue-button" on:click={startPomodoro}>
+			<button class="round-button blue-button" on:click={handleStartPomodoro}>
 				<span class="sr-only">Start Pomodoro</span>
 				<Icon>
 					<StartPath />
 				</Icon>
 			</button>
 		{/if}
-		<button class="round-button red-button" on:click={resetPomodoro}>
+		<button class="round-button red-button" on:click={handleRestartPomodoro}>
 			<span class="sr-only">Restart Pomodoro</span>
 			<Icon>
 				<ResetPath />
