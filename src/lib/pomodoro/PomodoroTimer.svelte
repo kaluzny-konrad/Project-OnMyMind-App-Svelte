@@ -118,6 +118,7 @@
 			});
 			timeoutWorker.onmessage = () => {
 				endPomodoroSession();
+				console.log('TimeoutWorker ended pomodoro session');
 			};
 		}
 	}
@@ -125,6 +126,7 @@
 	function clearTimeoutWorker() {
 		if (timeoutWorker) {
 			timeoutWorker.terminate();
+			console.log('Terminated timeoutWorker');
 			timeoutWorker = null;
 		}
 	}

@@ -1,3 +1,7 @@
 self.onmessage = (event) => {
-	setTimeout(() => self.postMessage({ type: 'timeout' }), event.data.delay);
+	console.log('timeoutWorker: timeout start');
+	setTimeout(() => {
+		self.postMessage({ type: 'timeout' });
+		console.log('timeoutWorker: timeout');
+	}, event.data.delay);
 };
