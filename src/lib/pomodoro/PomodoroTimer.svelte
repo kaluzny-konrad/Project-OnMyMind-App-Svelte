@@ -23,11 +23,11 @@
 	$: isRunning = false;
 	let audio: HTMLAudioElement;
 	const audioUrl = '/sounds/alarm.mp3';
-	let hiddenTimeout: NodeJS.Timeout | null = null;
 
 	onMount(() => {
 		pomodoro = getPomodoroFromStore();
 		audio = new Audio(audioUrl);
+		audio.volume = 0.1;
 		audio.addEventListener('ended', () => resetAudio());
 		requestAnimationFrame(updatePomodoro);
 		addVisibilityChangeListener();
@@ -52,7 +52,7 @@
 
 	function pausePomodoro() {
 		stopPomodoroInStore();
-		clearHiddenTimeout();
+		clearTimeoutWorker();
 	}
 
 	function updatePomodoro() {
@@ -72,7 +72,7 @@
 
 	function endPomodoroSession() {
 		audio.play();
-		clearHiddenTimeout();
+		clearTimeoutWorker();
 		deletePomodoro();
 	}
 
@@ -98,26 +98,34 @@
 		if (typeof window !== 'undefined') {
 			document.removeEventListener('visibilitychange', handleVisibilityChange);
 		}
+		clearTimeoutWorker();
 	});
 
 	function handleVisibilityChange() {
 		if (document.hidden) {
-			setHiddenTimeout();
+			setTimeoutWorker();
 		} else {
-			clearHiddenTimeout();
+			clearTimeoutWorker();
 		}
 	}
 
-	function setHiddenTimeout() {
+	let timeoutWorker: Worker | null = null;
+	function setTimeoutWorker() {
 		if (pomodoro?.isRunning) {
-			hiddenTimeout = setTimeout(endPomodoroSession, remainingTime);
+			timeoutWorker = new Worker('/workers/timeoutWorker.js');
+			timeoutWorker.postMessage({
+				delay: remainingTime - 60 * 1000,
+			});
+			timeoutWorker.onmessage = () => {
+				endPomodoroSession();
+			};
 		}
 	}
 
-	function clearHiddenTimeout() {
-		if (hiddenTimeout) {
-			clearTimeout(hiddenTimeout);
-			hiddenTimeout = null;
+	function clearTimeoutWorker() {
+		if (timeoutWorker) {
+			timeoutWorker.terminate();
+			timeoutWorker = null;
 		}
 	}
 </script>
@@ -151,9 +159,9 @@
 			type="range"
 			class="slider"
 			id="pomodoroMaxTime"
-			min={60 * 1 * 1000}
+			min={5 * 1 * 1000}
 			max={45 * 60 * 1000}
-			step={60 * 5 * 1000}
+			step={60 * 1 * 1000}
 			bind:value={chosenTime}
 			disabled={pomodoro != null}
 		/>
