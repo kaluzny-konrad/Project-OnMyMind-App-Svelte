@@ -18,16 +18,15 @@
 
 	const MAX_TIME = 15 * 60 * 1000;
 	let pomodoro: Pomodoro | null = null;
-	let interval: NodeJS.Timer;
 	$: chosenTime = MAX_TIME;
 	$: remainingTime = chosenTime;
 	$: isRunning = false;
 
 	onMount(() => {
 		pomodoro = getPomodoroFromStore();
-		interval = setInterval(refreshPomodoro, 1);
 		audio = new Audio(audioUrl);
 		audio.addEventListener('ended', () => resetAudio());
+		requestAnimationFrame(updatePomodoro);
 	});
 
 	function addPomodoroToStoreIfNotExists() {
@@ -38,20 +37,27 @@
 		if (!pomodoro) resetAudio();
 		pomodoro = addPomodoroToStoreIfNotExists();
 		startPomodoroInStore();
+		requestAnimationFrame(updatePomodoro);
 	}
 
 	function pausePomodoro() {
 		stopPomodoroInStore();
 	}
 
-	function refreshPomodoro() {
+	function updatePomodoro() {
 		if (!pomodoro) return;
-		const wasRunning = isRunning;
+		const wasRunning = pomodoro.isRunning;
 		isRunning = pomodoro.isRunning;
 		remainingTime = pomodoro.getRemainingTime();
+
 		if (remainingTime <= 0 && wasRunning) {
 			audio.play();
 			deletePomodoro();
+			return;
+		}
+
+		if (isRunning) {
+			requestAnimationFrame(updatePomodoro);
 		}
 	}
 

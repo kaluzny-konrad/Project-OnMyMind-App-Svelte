@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { onMount, onDestroy } from 'svelte';
+	import { onMount } from 'svelte';
 	import { getTimersTimeElapsedSum } from './timerStore';
 	import TimeVizualizer from '../common/TimeVizualizer.svelte';
 
@@ -7,16 +7,11 @@
 
 	function refreshSum() {
 		time = getTimersTimeElapsedSum();
+		requestAnimationFrame(refreshSum);
 	}
 
-	let interval: NodeJS.Timer;
-
 	onMount(() => {
-		interval = setInterval(refreshSum, 1);
-	});
-
-	onDestroy(() => {
-		clearInterval(interval as unknown as number);
+		requestAnimationFrame(refreshSum);
 	});
 </script>
 
