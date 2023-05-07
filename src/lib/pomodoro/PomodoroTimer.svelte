@@ -21,13 +21,23 @@
 	$: chosenTime = MAX_TIME;
 	$: remainingTime = chosenTime;
 	$: isRunning = false;
+	let audio: HTMLAudioElement;
+	const audioUrl = '/sounds/alarm.mp3';
+	let hiddenTimeout: NodeJS.Timeout | null = null;
 
 	onMount(() => {
 		pomodoro = getPomodoroFromStore();
 		audio = new Audio(audioUrl);
 		audio.addEventListener('ended', () => resetAudio());
 		requestAnimationFrame(updatePomodoro);
+		addVisibilityChangeListener();
 	});
+
+	function addVisibilityChangeListener() {
+		if (typeof window !== 'undefined') {
+			document.addEventListener('visibilitychange', handleVisibilityChange);
+		}
+	}
 
 	function addPomodoroToStoreIfNotExists() {
 		return getPomodoroFromStore() ?? addPomodoroToStore(chosenTime);
@@ -42,6 +52,7 @@
 
 	function pausePomodoro() {
 		stopPomodoroInStore();
+		clearHiddenTimeout();
 	}
 
 	function updatePomodoro() {
@@ -51,14 +62,18 @@
 		remainingTime = pomodoro.getRemainingTime();
 
 		if (remainingTime <= 0 && wasRunning) {
-			audio.play();
-			deletePomodoro();
-			return;
+			endPomodoroSession();
 		}
 
 		if (isRunning) {
 			requestAnimationFrame(updatePomodoro);
 		}
+	}
+
+	function endPomodoroSession() {
+		audio.play();
+		clearHiddenTimeout();
+		deletePomodoro();
 	}
 
 	function deletePomodoro() {
@@ -80,10 +95,31 @@
 
 	onDestroy(() => {
 		pausePomodoro();
+		if (typeof window !== 'undefined') {
+			document.removeEventListener('visibilitychange', handleVisibilityChange);
+		}
 	});
 
-	let audio: HTMLAudioElement;
-	const audioUrl = '/sounds/alarm.mp3';
+	function handleVisibilityChange() {
+		if (document.hidden) {
+			setHiddenTimeout();
+		} else {
+			clearHiddenTimeout();
+		}
+	}
+
+	function setHiddenTimeout() {
+		if (pomodoro?.isRunning) {
+			hiddenTimeout = setTimeout(endPomodoroSession, remainingTime);
+		}
+	}
+
+	function clearHiddenTimeout() {
+		if (hiddenTimeout) {
+			clearTimeout(hiddenTimeout);
+			hiddenTimeout = null;
+		}
+	}
 </script>
 
 <div class="wide-component">
@@ -115,7 +151,7 @@
 			type="range"
 			class="slider"
 			id="pomodoroMaxTime"
-			min={60 * 5 * 1000}
+			min={3 * 1 * 1000}
 			max={45 * 60 * 1000}
 			step={60 * 5 * 1000}
 			bind:value={chosenTime}
