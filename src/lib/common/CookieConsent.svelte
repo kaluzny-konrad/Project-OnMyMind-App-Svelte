@@ -1,5 +1,6 @@
 <script>
-	import { onMount } from 'svelte';
+	import { onMount, setContext } from 'svelte';
+	import { writable } from 'svelte/store';
 
 	const COOKIE_CONSENT_KEY = 'cookie_consent';
 
