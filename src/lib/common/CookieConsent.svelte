@@ -46,8 +46,8 @@
 </script>
 
 {#if isPopupVisible}
-	<div class="fixed bottom-40 z-50 m-4 rounded-lg bg-white shadow-xl">
-		<div class="mx-auto max-w-xl p-4 text-center">
+	<div class="fixed bottom-40 left-0 right-0 z-50 bg-white p-4">
+		<div class="mx-auto max-w-xl rounded-lg p-4 text-center shadow-lg">
 			<p class="mb-2 text-sm text-gray-500">
 				This website uses cookies to ensure you get the best experience on our
 				website.
