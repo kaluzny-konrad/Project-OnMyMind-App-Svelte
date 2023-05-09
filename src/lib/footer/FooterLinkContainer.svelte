@@ -6,4 +6,5 @@
 	<FooterLink href="/" text="&copy; OnMyMind 2023" first={true} />
 	<FooterLink href="/terms" text="Terms of Use" />
 	<FooterLink href="/privacy" text="Privacy Policy" />
+	<FooterLink href="/contact" text="Contact" />
 </div>
