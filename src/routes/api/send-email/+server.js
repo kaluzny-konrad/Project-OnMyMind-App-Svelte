@@ -2,15 +2,8 @@ import sgMail from '@sendgrid/mail';
 
 sgMail.setApiKey(import.meta.env.VITE_SENDGRID_API_KEY);
 
-export async function GET() {
-	return {
-		status: 200,
-		body: { success: true },
-	};
-}
-
-export async function POST(request) {
-	const { email, message } = request.body;
+export async function POST({ request }) {
+	const { email, message } = await request.json();
 	const msg = {
 		to: import.meta.env.VITE_EMAIL_ADDRESS,
 		from: import.meta.env.VITE_EMAIL_ADDRESS,
@@ -20,9 +13,9 @@ export async function POST(request) {
 
 	try {
 		await sgMail.send(msg);
-		return true;
+		return new Response(true);
 	} catch (error) {
 		console.error(error);
-		return false;
+		return new Response(false);
 	}
 }
