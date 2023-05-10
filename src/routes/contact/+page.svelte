@@ -1,11 +1,12 @@
 <script>
-	$: email = '';
+	import sendEmail from '../../lib/api/+server';
 	$: message = '';
+	$: email = '';
 	$: sent = false;
 	$: error = false;
 
 	async function handleSubmit() {
-		sent = true;
+		sent = await sendEmail(email, message);
 		if (sent) {
 			cleanForm();
 		} else {
