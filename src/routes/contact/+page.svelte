@@ -1,17 +1,27 @@
 <script>
-	import sendEmail from '../../lib/api/+server';
+	import httpPost from '../../lib/api/sendMailApi';
 	$: message = '';
 	$: email = '';
 	$: sent = false;
 	$: error = false;
+	$: errorMessage = '';
 
 	async function handleSubmit() {
-		sent = await sendEmail(email, message);
-		if (sent) {
+		cleanSubmit();
+		const response = await httpPost(email, message);
+		if (response.status === 'success') {
+			sent = true;
 			cleanForm();
 		} else {
 			error = true;
+			errorMessage = response.message;
 		}
+	}
+
+	function cleanSubmit() {
+		sent = false;
+		error = false;
+		errorMessage = '';
 	}
 
 	function cleanForm() {
@@ -29,7 +39,7 @@
 		</div>
 	{:else if error}
 		<div class="mb-4 rounded-md bg-red-100 px-4 py-2 text-red-800">
-			Error sending message, please try again later.
+			{errorMessage}
 		</div>
 	{/if}
 
