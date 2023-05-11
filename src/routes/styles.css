@@ -112,3 +112,8 @@ button:focus:not(:focus-visible) {
 	width: 1px;
 	white-space: nowrap;
 }
+
+.fancy-box:hover {
+	transform: scale(1.05);
+	transition: all 0.3s ease-in-out;
+}
