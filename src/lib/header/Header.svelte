@@ -8,7 +8,8 @@
 		<div class="flex items-center justify-between">
 			<Logo />
 			<div class="flex">
-				<NavElement name="Home" href="/" />
+				<NavElement name="App" href="/" />
+				<NavElement name="Blog" href="/blog" />
 				<NavElement name="About" href="/about" />
 			</div>
 		</div>
