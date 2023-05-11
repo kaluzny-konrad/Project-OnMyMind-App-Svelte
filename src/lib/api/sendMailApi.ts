@@ -5,8 +5,6 @@ let lastSent = 0;
 const cooldown = 1000 * 5; // 5 seconds
 
 export default async function httpPost(email, message) {
-	console.log(import.meta.env.VITE_SENDGRID_API_KEY);
-	console.log(import.meta.env.VITE_EMAIL_ADDRESS);
 	const now = Date.now();
 	if (now - lastSent < cooldown) {
 		return {
