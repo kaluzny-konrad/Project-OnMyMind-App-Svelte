@@ -33,7 +33,7 @@ export default class MindTimer {
 			const now = Date.now();
 			nowElapsedTime = now - this.startTime;
 		}
-		let milliseconds = nowElapsedTime + this.beforeElapsedTime;
+		const milliseconds = nowElapsedTime + this.beforeElapsedTime;
 		return milliseconds;
 	}
 }

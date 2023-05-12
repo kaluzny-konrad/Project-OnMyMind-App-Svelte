@@ -11,7 +11,7 @@ const data: MindTimer[] = browser
 
 export const timers: Writable<MindTimer[]> = writable(
 	data.map((timer) => {
-		let correctTimer = new MindTimer(timer.mindId);
+		const correctTimer = new MindTimer(timer.mindId);
 		correctTimer.isRunning = timer.isRunning;
 		correctTimer.startTime = timer.startTime;
 		correctTimer.beforeElapsedTime = timer.beforeElapsedTime;
@@ -26,10 +26,10 @@ timers.subscribe((value: MindTimer[]) => {
 });
 
 export const addTimerToStore = (mindId: string): MindTimer => {
-	let existedTimer = getTimerFromStore(mindId);
+	const existedTimer = getTimerFromStore(mindId);
 	if (existedTimer) return existedTimer;
 
-	let timer: MindTimer = new MindTimer(mindId);
+	const timer: MindTimer = new MindTimer(mindId);
 
 	timers.update((currentTimers: MindTimer[]) => {
 		return [...currentTimers, timer];
@@ -71,7 +71,7 @@ export const stopTimerInStore = (mindId: string): void => {
 };
 
 export const getTimersTimeElapsedSum = (): number => {
-	let sum: number = 0;
+	let sum = 0;
 	timers.subscribe((currentTimers: MindTimer[]) => {
 		sum = currentTimers?.reduce((sum: number, timer: MindTimer) => {
 			return sum + timer?.getTimeElapsed();

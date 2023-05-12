@@ -19,7 +19,7 @@ minds.subscribe((value: Mind[]) => {
 });
 
 export const addMindToStore = (mindName: string): string => {
-	let id = uuidv4();
+	const id = uuidv4();
 	minds.update((currentMinds: Mind[]) => {
 		return [{ id: id, name: mindName, isComplete: false }, ...currentMinds];
 	});

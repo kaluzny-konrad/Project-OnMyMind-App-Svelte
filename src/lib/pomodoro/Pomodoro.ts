@@ -33,7 +33,7 @@ export default class Pomodoro {
 			const now = Date.now();
 			nowElapsedTime = now - this.startTime;
 		}
-		let milliseconds = nowElapsedTime + this.beforeElapsedTime;
+		const milliseconds = nowElapsedTime + this.beforeElapsedTime;
 		let remainingTime = this.maxTime - milliseconds;
 		if (remainingTime <= 0) {
 			remainingTime = 0;

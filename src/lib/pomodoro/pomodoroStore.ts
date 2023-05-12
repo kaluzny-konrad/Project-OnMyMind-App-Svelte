@@ -11,7 +11,7 @@ const data: Pomodoro[] = browser
 
 export const pomodoros: Writable<Pomodoro[]> = writable(
 	data.map((pomodoro) => {
-		let correctPomodoro = new Pomodoro(pomodoro.maxTime);
+		const correctPomodoro = new Pomodoro(pomodoro.maxTime);
 		correctPomodoro.isRunning = pomodoro.isRunning;
 		correctPomodoro.startTime = pomodoro.startTime;
 		correctPomodoro.beforeElapsedTime = pomodoro.beforeElapsedTime;
@@ -27,7 +27,7 @@ pomodoros.subscribe((value: Pomodoro[]) => {
 
 export const addPomodoroToStore = (maxTime: number): Pomodoro => {
 	if (maxTime < 0) maxTime = 60 * 1000;
-	let pomodoro: Pomodoro = new Pomodoro(maxTime);
+	const pomodoro: Pomodoro = new Pomodoro(maxTime);
 
 	pomodoros.update((currentPomodoros: Pomodoro[]) => {
 		return [...currentPomodoros, pomodoro];

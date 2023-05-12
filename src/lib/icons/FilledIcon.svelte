@@ -1,6 +1,6 @@
 <script lang="ts">
-	export let size: number = 30;
-	export let color: string = '#ffffff';
+	export let size = 30;
+	export let color = '#ffffff';
 </script>
 
 <svg
