@@ -3,17 +3,19 @@
 	"version": "0.0.1",
 	"private": true,
 	"scripts": {
+		"predev": "npm run test:unit",
 		"dev": "vite dev",
-		"build": "vite build",
+		"build": "npm run prepare-build && vite build",
 		"preview": "vite preview",
-		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
-		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"test": "npm run test:unit && npm run test:e2e",
 		"test:e2e": "playwright test",
-		"test:unit": "vitest",
+		"test:unit": "vitest run",
 		"test:unit-watch": "vitest --coverage",
+		"prepare-build": "npm run format && npm run lint && npm run check && npm run test:unit",
+		"format": "prettier --plugin-search-dir . --write .",
 		"lint": "prettier --plugin-search-dir . --check . && eslint .",
-		"format": "prettier --plugin-search-dir . --write ."
+		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch"
 	},
 	"devDependencies": {
 		"@playwright/test": "^1.28.1",
