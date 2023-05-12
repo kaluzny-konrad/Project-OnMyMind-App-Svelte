@@ -3,15 +3,19 @@
 	"version": "0.0.1",
 	"private": true,
 	"scripts": {
+		"predev": "npm run test:unit",
 		"dev": "vite dev",
-		"build": "vite build",
+		"build": "npm run prepare-build && vite build",
 		"preview": "vite preview",
-		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
-		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
+		"test": "npm run test:unit && npm run test:e2e",
 		"test:e2e": "playwright test",
-		"test:unit": "vitest",
+		"test:unit": "vitest run",
+		"test:unit-watch": "vitest --coverage",
+		"prepare-build": "npm run format && npm run lint && npm run check && npm run test:unit",
+		"format": "prettier --plugin-search-dir . --write .",
 		"lint": "prettier --plugin-search-dir . --check . && eslint .",
-		"format": "prettier --plugin-search-dir . --write ."
+		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch"
 	},
 	"devDependencies": {
 		"@playwright/test": "^1.28.1",
@@ -22,6 +26,7 @@
 		"@types/uuid": "^9.0.1",
 		"@typescript-eslint/eslint-plugin": "^5.45.0",
 		"@typescript-eslint/parser": "^5.45.0",
+		"@vitest/coverage-c8": "^0.31.0",
 		"autoprefixer": "^10.4.14",
 		"eslint": "^8.28.0",
 		"eslint-config-prettier": "^8.5.0",
@@ -38,7 +43,7 @@
 		"typescript": "^5.0.0",
 		"uuid": "^9.0.0",
 		"vite": "^4.3.0",
-		"vitest": "^0.25.3"
+		"vitest": "^0.30.0"
 	},
 	"type": "module",
 	"dependencies": {

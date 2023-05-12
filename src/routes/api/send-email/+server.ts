@@ -10,7 +10,7 @@ export async function POST({ request }) {
 
 	const now = Date.now();
 	if (now - lastSent < cooldown) {
-		return new Response(false);
+		return new Response('false');
 	}
 	lastSent = now;
 
@@ -23,9 +23,9 @@ export async function POST({ request }) {
 
 	try {
 		await sgMail.send(msg);
-		return new Response(true);
+		return new Response('true');
 	} catch (error) {
 		console.error(error);
-		return new Response(false);
+		return new Response('false');
 	}
 }

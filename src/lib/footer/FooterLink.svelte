@@ -1,7 +1,7 @@
 <script lang="ts">
-	export let href: string = '/';
+	export let href = '/';
 	export let text: string;
-	export let first: boolean = false;
+	export let first = false;
 </script>
 
 <span class="truncate">

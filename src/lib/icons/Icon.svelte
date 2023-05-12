@@ -1,5 +1,5 @@
 <script lang="ts">
-	export let strokeWidth: number = 1.5;
+	export let strokeWidth = 1.5;
 </script>
 
 <div class="w-6">

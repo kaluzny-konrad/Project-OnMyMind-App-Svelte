@@ -6,8 +6,8 @@ const config = {
 	preprocess: vitePreprocess(),
 
 	kit: {
-		adapter: vercel()
-	}
+		adapter: vercel(),
+	},
 };
 
 export default config;

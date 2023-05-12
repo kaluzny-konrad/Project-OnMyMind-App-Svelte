@@ -49,7 +49,7 @@ describe('Timers Store', () => {
 	});
 
 	test('Deleting a timer from the store', () => {
-		const timer = addTimerToStore('mindId');
+		addTimerToStore('mindId');
 		deleteTimerFromStore('mindId');
 		const foundTimer = getTimerFromStore('mindId');
 		expect(foundTimer).toBeNull();
