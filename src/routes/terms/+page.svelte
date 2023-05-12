@@ -1,3 +1,8 @@
+<svelte:head>
+	<title>OnMyMind Terms and Conditions</title>
+	<meta name="description" content="Terms and Conditions app OnMyMind." />
+</svelte:head>
+
 <div class="container mx-auto px-4 py-8">
 	<h1 class="mb-4 text-4xl font-bold">Terms and Conditions</h1>
 	<p class="mb-4 text-center font-bold">Effective Date: May 2023</p>

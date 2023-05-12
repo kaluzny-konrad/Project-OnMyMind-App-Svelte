@@ -1,3 +1,8 @@
+<svelte:head>
+	<title>OnMyMind Privacy Policy</title>
+	<meta name="description" content="Privacy Policy app OnMyMind." />
+</svelte:head>
+
 <div class="container mx-auto px-4 py-8">
 	<h1 class="mb-4 text-4xl font-bold">Privacy Policy:</h1>
 	<p class="mb-8 text-lg font-semibold">

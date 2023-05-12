@@ -19,6 +19,11 @@
 	});
 </script>
 
+<svelte:head>
+	<title>OnMyMind Blog</title>
+	<meta name="description" content="Blog about app OnMyMind." />
+</svelte:head>
+
 {#if blogContent && blogInfo}
 	<div class="container mx-auto p-4">
 		<h1 class="mb-4 text-2xl font-bold">{blogInfo.title}</h1>

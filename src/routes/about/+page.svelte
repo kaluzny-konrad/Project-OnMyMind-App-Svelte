@@ -1,3 +1,8 @@
+<svelte:head>
+	<title>OnMyMind About</title>
+	<meta name="description" content="About app OnMyMind." />
+</svelte:head>
+
 <div class="container mx-auto px-4 py-8">
 	<div class="mb-6 flex flex-col items-center justify-center space-y-4">
 		<h1 class="text-4xl font-bold">About OnMyMind</h1>
