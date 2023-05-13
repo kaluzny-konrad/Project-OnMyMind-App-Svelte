@@ -8,9 +8,7 @@
 
 {#if href && name}
 	<a class="text-link font-bold" {href}>
-		<div
-			class="{activeStyle} border-b-2 p-6 transition-all duration-500 hover:border-gray-800"
-		>
+		<div class="{activeStyle} border-b-2 p-6 hover:border-gray-800">
 			{name}
 		</div>
 	</a>

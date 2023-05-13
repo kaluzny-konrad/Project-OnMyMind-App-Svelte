@@ -21,7 +21,8 @@ const config: PlaywrightTestConfig = {
 
 	use: {
 		// Base URL to use in actions like `await page.goto('/')`.
-		baseURL: process.env.VERCEL_URL || 'http://localhost:4173/',
+		//baseURL: process.env.VERCEL_URL || 'http://localhost:4173/',
+		baseURL: process.env.VERCEL_URL || 'http://localhost:5173/',
 
 		// Collect trace when retrying the failed test.
 		trace: 'on-first-retry',

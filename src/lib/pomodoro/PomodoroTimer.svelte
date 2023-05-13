@@ -140,43 +140,45 @@
 	}
 </script>
 
-<div class="wide-component">
-	<div class="wide-row">
-		<TimeVizualizer time={remainingTime} />
+<div class="flex">
+	<div class="wide-component">
+		<div class="wide-row">
+			<TimeVizualizer time={remainingTime} />
 
-		{#if isRunning}
-			<button class="round-button gray-button" on:click={handlePausePomodoro}>
-				<span class="sr-only">Stop Pomodoro</span>
+			{#if isRunning}
+				<button class="round-button gray-button" on:click={handlePausePomodoro}>
+					<span class="sr-only">Stop Pomodoro</span>
+					<Icon>
+						<PausePath />
+					</Icon>
+				</button>
+			{:else}
+				<button class="round-button blue-button" on:click={handleStartPomodoro}>
+					<span class="sr-only">Start Pomodoro</span>
+					<Icon>
+						<StartPath />
+					</Icon>
+				</button>
+			{/if}
+			<button class="round-button red-button" on:click={handleRestartPomodoro}>
+				<span class="sr-only">Restart Pomodoro</span>
 				<Icon>
-					<PausePath />
+					<ResetPath />
 				</Icon>
 			</button>
-		{:else}
-			<button class="round-button blue-button" on:click={handleStartPomodoro}>
-				<span class="sr-only">Start Pomodoro</span>
-				<Icon>
-					<StartPath />
-				</Icon>
-			</button>
-		{/if}
-		<button class="round-button red-button" on:click={handleRestartPomodoro}>
-			<span class="sr-only">Restart Pomodoro</span>
-			<Icon>
-				<ResetPath />
-			</Icon>
-		</button>
-		<input
-			type="range"
-			class="slider"
-			id="pomodoroMaxTime"
-			min={60 * 5 * 1000}
-			max={45 * 60 * 1000}
-			step={60 * 5 * 1000}
-			bind:value={chosenTime}
-			disabled={pomodoro != null}
-		/>
-		<label for="pomodoroMaxTime" class="sr-only"
-			>{chosenTime / 60 / 1000} minutes</label
-		>
+			<input
+				type="range"
+				class="slider"
+				id="pomodoroMaxTime"
+				min={60 * 5 * 1000}
+				max={45 * 60 * 1000}
+				step={60 * 5 * 1000}
+				bind:value={chosenTime}
+				disabled={pomodoro != null}
+			/>
+			<label for="pomodoroMaxTime" class="sr-only"
+				>{chosenTime / 60 / 1000} minutes</label
+			>
+		</div>
 	</div>
 </div>

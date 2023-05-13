@@ -11,7 +11,5 @@
 	/>
 </svelte:head>
 
-<div class="flex">
-	<Pomodoro />
-</div>
+<Pomodoro />
 <MindSection />
