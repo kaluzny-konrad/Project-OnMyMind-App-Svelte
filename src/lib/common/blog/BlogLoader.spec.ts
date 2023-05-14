@@ -40,7 +40,7 @@ global.fetch = jest.fn().mockImplementation((input: RequestInfo) => {
 	throw new Error(`Unhandled fetch: ${input}`);
 });
 
-it('renders the Blog component', async () => {
+it('show Loading on start', async () => {
 	render(BlogLoader, {
 		shortName: mockedBlogShortName,
 	});
