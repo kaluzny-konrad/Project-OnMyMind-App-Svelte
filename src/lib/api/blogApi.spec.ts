@@ -1,6 +1,5 @@
-import { getBlogsInfo, getBlogInfo, getBlogContent } from './blogApi';
+import { getBlogsInfo, getBlogInfo } from './blogApi';
 import type BlogInfo from '../types/BlogInfo';
-import type BlogContent from '../types/BlogContent';
 
 describe('Blog Info API - correct data on endpoint', () => {
 	const mockedBlogShortName = 'blog1';
