@@ -1,3 +1,3 @@
-export interface BlogContent {
+export default interface BlogContent {
 	content: string;
 }

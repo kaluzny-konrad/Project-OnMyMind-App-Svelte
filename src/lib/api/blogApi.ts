@@ -1,13 +1,13 @@
-import type { BlogInfo } from '../../lib/types/BlogInfo';
-import type { BlogContent } from '../../lib/types/BlogContent';
+import type BlogInfo from '../types/BlogInfo';
+import type BlogContent from '../types/BlogContent';
 
-export async function httpGetBlogsInfo(): Promise<BlogInfo[]> {
+export async function getBlogsInfo(): Promise<BlogInfo[]> {
 	const response = await fetch(`/data/blogs/blogsInfo.json`);
 	const blogsInfo = (await response.json()) as BlogInfo[];
 	return blogsInfo;
 }
 
-export async function httpGetBlogInfo(shortName: string): Promise<BlogInfo> {
+export async function getBlogInfo(shortName: string): Promise<BlogInfo> {
 	const response = await fetch(`/data/blogs/blogsInfo.json`);
 	const blogsInfo = (await response.json()) as BlogInfo[];
 	const blogInfo = blogsInfo.find(
@@ -17,9 +17,7 @@ export async function httpGetBlogInfo(shortName: string): Promise<BlogInfo> {
 	return blogInfo;
 }
 
-export async function httpGetBlogContent(
-	shortName: string,
-): Promise<BlogContent> {
+export async function getBlogContent(shortName: string): Promise<BlogContent> {
 	const response = await fetch(`/data/blogs/${shortName}/blogContent.json`);
 	const blogContent = (await response.json()) as BlogContent;
 	return blogContent;

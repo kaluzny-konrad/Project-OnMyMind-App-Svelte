@@ -1,6 +1,6 @@
 <script lang="ts">
-	import MindSection from '../lib/mind/MindSection.svelte';
-	import Pomodoro from '../lib/pomodoro/PomodoroTimer.svelte';
+	import MindSection from '../lib/common/mind/MindSection.svelte';
+	import Pomodoro from '../lib/common/pomodoro/PomodoroTimer.svelte';
 </script>
 
 <svelte:head>
@@ -11,7 +11,5 @@
 	/>
 </svelte:head>
 
-<div class="flex">
-	<Pomodoro />
-</div>
+<Pomodoro />
 <MindSection />

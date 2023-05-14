@@ -1,0 +1,22 @@
+<script lang="ts">
+	import { onMount } from 'svelte';
+	import { getBlogContent, getBlogInfo } from '../../api/blogApi';
+	import type BlogContent from '../../types/BlogContent';
+	import type BlogInfo from '../../types/BlogInfo';
+	import Blog from './Blog.svelte';
+
+	export let shortName: string;
+	export let blogContent: BlogContent | null = null;
+	export let blogInfo: BlogInfo | null = null;
+
+	onMount(async () => {
+		blogContent = await getBlogContent(shortName);
+		blogInfo = await getBlogInfo(shortName);
+	});
+</script>
+
+{#if blogContent && blogInfo}
+	<Blog {blogContent} {blogInfo} />
+{:else}
+	<p>Loading...</p>
+{/if}

@@ -1,9 +1,9 @@
 <script lang="ts">
 	import '../app.css';
 	import './styles.css';
-	import Header from '../lib/header/Header.svelte';
-	import Footer from '../lib/footer/Footer.svelte';
-	import CookieConsent from '../lib/common/CookieConsent.svelte';
+	import Header from '../lib/common/header/Header.svelte';
+	import Footer from '../lib/common/footer/Footer.svelte';
+	import CookieConsent from '../lib/common/cookie/CookieConsent.svelte';
 </script>
 
 <Header />

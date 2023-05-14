@@ -8,7 +8,7 @@ export default async function httpPost(email: string, message: string) {
 	if (now - lastSent < cooldown) {
 		return {
 			status: 'error',
-			message: 'Too many requests. Please try again later.',
+			message: 'Too many attempts, please try again later.',
 		};
 	}
 	lastSent = now;
@@ -18,7 +18,7 @@ export default async function httpPost(email: string, message: string) {
 	if (!emailRegex.test(email)) {
 		return {
 			status: 'error',
-			message: 'Provided e-mail is not correct.',
+			message: 'Invalid email address!',
 		};
 	}
 	const mailContent = `E-mail: ${email}\n Message:\n${message}`;
