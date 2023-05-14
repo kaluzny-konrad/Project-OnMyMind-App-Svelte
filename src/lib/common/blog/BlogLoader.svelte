@@ -3,6 +3,7 @@
 	import { getBlogContent, getBlogInfo } from '../../api/blogApi';
 	import type BlogContent from '../../types/BlogContent';
 	import type BlogInfo from '../../types/BlogInfo';
+	import Blog from './Blog.svelte';
 
 	export let shortName: string;
 	let blogContent: BlogContent;
@@ -15,9 +16,7 @@
 </script>
 
 {#if blogContent && blogInfo}
-
-<Blog blogContent={blogContent} blogInfo={blogInfo} />
-
+	<Blog {blogContent} {blogInfo} />
 {:else}
 	<p>Loading...</p>
 {/if}
