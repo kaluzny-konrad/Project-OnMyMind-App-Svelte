@@ -6,8 +6,8 @@
 	import Blog from './Blog.svelte';
 
 	export let shortName: string;
-	export let blogContent: BlogContent | null = null;
-	export let blogInfo: BlogInfo | null = null;
+	let blogContent: BlogContent;
+	let blogInfo: BlogInfo;
 
 	onMount(async () => {
 		blogContent = await getBlogContent(shortName);

@@ -1,4 +1,3 @@
-import { vi } from 'vitest';
 import MindTimer from './MindTimer';
 
 describe('MindTimer', () => {
@@ -7,12 +6,12 @@ describe('MindTimer', () => {
 
 	beforeEach(() => {
 		timer = new MindTimer(originalName);
-		vi.useFakeTimers({ shouldAdvanceTime: true });
+		jest.useFakeTimers();
 	});
 
 	afterEach(() => {
-		vi.runOnlyPendingTimers();
-		vi.useRealTimers();
+		jest.runOnlyPendingTimers();
+		jest.useRealTimers();
 	});
 
 	it('initializes with correct values', () => {
@@ -32,41 +31,41 @@ describe('MindTimer', () => {
 		expect(timer.isRunning).toBe(false);
 	});
 
-	it('returns correct getTimeElapsed() when timer is running', async () => {
+	it('returns correct getTimeElapsed() when timer is running', () => {
 		const expectedTime = 5000;
 		timer.start();
-		vi.advanceTimersByTime(expectedTime);
+		jest.advanceTimersByTime(expectedTime);
 		expect(timer.isRunning).toBe(true);
 		expect(timer.getTimeElapsed()).toBe(expectedTime);
 	});
 
-	it('returns correct getTimeElapsed() when timer is stoped', async () => {
+	it('returns correct getTimeElapsed() when timer is stopped', () => {
 		const expectedTime = 5000;
 		timer.start();
-		vi.advanceTimersByTime(expectedTime);
+		jest.advanceTimersByTime(expectedTime);
 		timer.stop();
 		expect(timer.isRunning).toBe(false);
 		expect(timer.getTimeElapsed()).toBe(expectedTime);
 	});
 
-	it('returns correct getTimeElapsed() when timer is stoped some time', async () => {
+	it('returns correct getTimeElapsed() when timer is stopped some time', () => {
 		const expectedTime = 5000;
 		timer.start();
-		vi.advanceTimersByTime(expectedTime);
+		jest.advanceTimersByTime(expectedTime);
 		timer.stop();
-		vi.advanceTimersByTime(expectedTime);
+		jest.advanceTimersByTime(expectedTime);
 		expect(timer.isRunning).toBe(false);
 		expect(timer.getTimeElapsed()).toBe(expectedTime);
 	});
 
-	it('returns correct getTimeElapsed() when timer is stoped and started again', async () => {
+	it('returns correct getTimeElapsed() when timer is stopped and started again', () => {
 		const expectedTime = 5000;
 		timer.start();
-		vi.advanceTimersByTime(expectedTime);
+		jest.advanceTimersByTime(expectedTime);
 		timer.stop();
-		vi.advanceTimersByTime(expectedTime);
+		jest.advanceTimersByTime(expectedTime);
 		timer.start();
-		vi.advanceTimersByTime(expectedTime);
+		jest.advanceTimersByTime(expectedTime);
 		expect(timer.isRunning).toBe(true);
 		expect(timer.getTimeElapsed()).toBe(expectedTime * 2);
 	});

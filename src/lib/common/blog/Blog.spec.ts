@@ -1,3 +1,4 @@
+import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/svelte';
 import type BlogContent from '../../types/BlogContent';
 import type BlogInfo from '../../types/BlogInfo';

@@ -1,4 +1,5 @@
 import ContactForm from './ContactForm.svelte';
+import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/svelte';
 
 describe('ContactForm', () => {

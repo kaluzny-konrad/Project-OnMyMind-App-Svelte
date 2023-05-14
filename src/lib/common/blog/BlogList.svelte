@@ -4,7 +4,7 @@
 	import { onMount } from 'svelte';
 	import BlogBox from './BlogBox.svelte';
 
-	export let blogs: BlogInfo[] = [];
+	let blogs: BlogInfo[] = [];
 
 	onMount(async () => (blogs = await getBlogsInfo()));
 </script>

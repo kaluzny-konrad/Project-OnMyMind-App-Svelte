@@ -1,4 +1,3 @@
-import { vi } from 'vitest';
 import {
 	addPomodoroToStore,
 	getPomodoroFromStore,
@@ -15,12 +14,12 @@ describe('PomodoroStore', () => {
 
 	beforeEach(() => {
 		pomodoros.set([]);
-		vi.useFakeTimers({ shouldAdvanceTime: true });
+		jest.useFakeTimers();
 	});
 
 	afterEach(() => {
-		vi.runOnlyPendingTimers();
-		vi.useRealTimers();
+		jest.runOnlyPendingTimers();
+		jest.useRealTimers();
 	});
 
 	it('adds pomodoro to store correctly', () => {
@@ -81,7 +80,7 @@ describe('PomodoroStore', () => {
 		addPomodoroToStore(maxTime);
 		startPomodoroInStore();
 		const expectedTime = maxTime / 2;
-		vi.advanceTimersByTime(expectedTime);
+		jest.advanceTimersByTime(expectedTime);
 		const pomodoro = getPomodoroFromStore() as Pomodoro;
 		expect(pomodoro.isRunning).toBe(true);
 		expect(pomodoro.getRemainingTime()).toBe(expectedTime);
@@ -91,7 +90,7 @@ describe('PomodoroStore', () => {
 		addPomodoroToStore(maxTime);
 		startPomodoroInStore();
 		const expectedTime = maxTime / 2;
-		vi.advanceTimersByTime(expectedTime);
+		jest.advanceTimersByTime(expectedTime);
 		stopPomodoroInStore();
 		const pomodoro = getPomodoroFromStore() as Pomodoro;
 		expect(pomodoro.isRunning).toBe(false);

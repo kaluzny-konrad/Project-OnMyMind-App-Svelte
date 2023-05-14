@@ -1,4 +1,3 @@
-import { vi } from 'vitest';
 import {
 	timers,
 	addTimerToStore,
@@ -12,12 +11,12 @@ import {
 describe('Timers Store', () => {
 	beforeEach(() => {
 		timers.set([]);
-		vi.useFakeTimers({ shouldAdvanceTime: true });
+		jest.useFakeTimers();
 	});
 
 	afterEach(() => {
-		vi.runOnlyPendingTimers();
-		vi.useRealTimers();
+		jest.runOnlyPendingTimers();
+		jest.useRealTimers();
 	});
 
 	test('Adding a timer to the store', () => {
@@ -73,9 +72,9 @@ describe('Timers Store', () => {
 		const timer1 = addTimerToStore('mindId1');
 		const timer2 = addTimerToStore('mindId2');
 		startTimerInStore('mindId1');
-		vi.advanceTimersByTime(expectedTime);
+		jest.advanceTimersByTime(expectedTime);
 		startTimerInStore('mindId2');
-		vi.advanceTimersByTime(expectedTime);
+		jest.advanceTimersByTime(expectedTime);
 		expect(getTimersTimeElapsedSum()).toBe(expectedTime * 2);
 		expect(timer1.getTimeElapsed()).toBe(expectedTime);
 		expect(timer2.getTimeElapsed()).toBe(expectedTime);
