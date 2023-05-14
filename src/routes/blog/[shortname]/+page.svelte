@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import Blog from '$lib/common/blog/Blog.svelte';
+	import BlogLoader from '../../../lib/common/blog/BlogLoader.svelte';
 	$: shortName = $page.params.shortname;
 </script>
 
@@ -10,5 +10,5 @@
 </svelte:head>
 
 <div class="wide-page">
-	<Blog {shortName} />
+	<BlogLoader {shortName} />
 </div>

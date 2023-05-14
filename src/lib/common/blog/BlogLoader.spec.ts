@@ -1,9 +1,7 @@
-import { render, waitFor, screen } from '@testing-library/svelte';
-import { vitest, vi } from 'vitest';
+import { render, screen } from '@testing-library/svelte';
 import type BlogContent from '../../types/BlogContent';
 import type BlogInfo from '../../types/BlogInfo';
 import BlogLoader from './BlogLoader.svelte';
-import * as exports from '../../api/blogApi';
 
 const shortName = 'example-blog';
 
@@ -23,6 +21,18 @@ it('renders the Blog component', async () => {
 		shortName: shortName,
 	});
 
-	const loadingMessage = screen.getByText('Loading...');
-	expect(loadingMessage).toBeInTheDocument();
+	expect(screen.getByText('Loading...')).toBeInTheDocument();
+});
+
+it('renders the Blog component', async () => {
+	render(BlogLoader, {
+		shortName: shortName,
+		blogContent: mockedBlogContent,
+		blogInfo: mockedBlogInfo,
+	});
+
+	expect(screen.getByTestId('blog-title')).toHaveTextContent(
+		mockedBlogInfo.title,
+	);
+	expect(screen.getByText(mockedBlogContent.content)).toBeInTheDocument();
 });
