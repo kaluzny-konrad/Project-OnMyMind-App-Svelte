@@ -1,5 +1,5 @@
 <script>
-	import Contact from './Contact.svelte';
+	import ContactForm from '../../lib/common/contact/ContactForm.svelte';
 </script>
 
 <svelte:head>
@@ -7,4 +7,7 @@
 	<meta name="description" content="Contact page OnMyMind." />
 </svelte:head>
 
-<Contact />
+<div class="narrow-page">
+	<h1 class="page-title">Contact</h1>
+	<ContactForm />
+</div>

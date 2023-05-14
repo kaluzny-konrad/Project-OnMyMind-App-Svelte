@@ -1,5 +1,5 @@
 <script>
-	import Privacy from './Privacy.svelte';
+	import PrivacyContent from '../../lib/common/staticContent/PrivacyContent.svelte';
 </script>
 
 <svelte:head>
@@ -7,4 +7,7 @@
 	<meta name="description" content="Privacy Policy app OnMyMind." />
 </svelte:head>
 
-<Privacy />
+<div class="wide-page">
+	<h1 class="page-title">Privacy Policy</h1>
+	<PrivacyContent />
+</div>

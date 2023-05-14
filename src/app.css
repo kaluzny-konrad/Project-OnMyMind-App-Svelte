@@ -3,9 +3,22 @@
 @tailwind utilities;
 
 @layer components {
+	.wide-page {
+		@apply mx-auto max-w-5xl px-4 py-8;
+	}
+
+	.narrow-page {
+		@apply mx-auto max-w-xl px-4 py-8;
+	}
+
+	.page-title {
+		@apply text-2xl font-bold text-gray-700;
+	}
+
 	.wide-component {
 		@apply mx-auto mt-2 max-w-5xl space-y-4 px-2 lg:px-8;
 	}
+
 	.wide-row {
 		@apply flex items-center justify-center space-x-2;
 	}
@@ -19,6 +32,10 @@
 
 	.input-text {
 		@apply w-2 flex-grow rounded-md border border-gray-300 px-4 py-2 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-400;
+	}
+
+	.border-focus {
+		@apply rounded-md border border-gray-300 hover:border-transparent hover:outline-none hover:ring-2 hover:ring-blue-400;
 	}
 
 	.round-button {
