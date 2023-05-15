@@ -49,8 +49,10 @@ describe('EditMindInput Component', () => {
 		const expectedName = 'new name';
 
 		const input = screen.getByTestId('edit-task') as HTMLInputElement;
-		input.value = expectedName;
-		input.dispatchEvent(new Event('input'));
+
+		await fireEvent.input(input, {
+			target: { value: expectedName },
+		});
 
 		expect(changeMindNameInStore).toHaveBeenCalledWith(mind.id, expectedName);
 
