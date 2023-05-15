@@ -1,3 +1,4 @@
+import '@testing-library/jest-dom';
 import type BlogInfo from '../../types/BlogInfo';
 import BlogBox from './BlogBox.svelte';
 import { render, screen } from '@testing-library/svelte';

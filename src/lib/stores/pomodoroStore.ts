@@ -1,11 +1,11 @@
 import type { Writable } from 'svelte/store';
 import { writable } from 'svelte/store';
-import { browser } from '$app/environment';
 import Pomodoro from '../types/Pomodoro';
 
 const storageName = 'pomodoro';
 
-const data: Pomodoro[] = browser
+const isBrowser = typeof window !== 'undefined';
+const data: Pomodoro[] = isBrowser
 	? JSON.parse(window.localStorage.getItem(storageName) as string) ?? []
 	: [];
 
@@ -20,7 +20,7 @@ export const pomodoros: Writable<Pomodoro[]> = writable(
 );
 
 pomodoros.subscribe((value: Pomodoro[]) => {
-	if (browser) {
+	if (isBrowser) {
 		localStorage.setItem(storageName, JSON.stringify(value));
 	}
 });

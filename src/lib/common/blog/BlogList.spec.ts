@@ -1,9 +1,10 @@
+import '@testing-library/jest-dom';
 import type BlogInfo from '../../types/BlogInfo';
-import Blog from './BlogList.svelte';
-import { render, screen } from '@testing-library/svelte';
+import BlogList from './BlogList.svelte';
+import { render, screen, waitFor } from '@testing-library/svelte';
 
 describe('Blog', () => {
-	const mockedBlogsInfo: BlogInfo[] = [
+	const mockedBlogInfos: BlogInfo[] = [
 		{
 			shortName: 'shortName',
 			title: 'title',
@@ -18,21 +19,25 @@ describe('Blog', () => {
 		},
 	];
 
-	beforeEach(() => {
-		render(Blog, { blogs: mockedBlogsInfo });
+	global.fetch = jest.fn().mockResolvedValue({
+		json: jest.fn().mockResolvedValue(mockedBlogInfos),
 	});
 
-	it('should have mocked data', () => {
-		mockedBlogsInfo.forEach((mockedBlogInfo) => {
-			const blogBox = screen.getByTestId(`blog-${mockedBlogInfo.shortName}`);
+	it('should have mocked data', async () => {
+		render(BlogList);
+
+		await waitFor(() => {
+			const blogBox = screen.getByTestId(
+				`blog-${mockedBlogInfos[0].shortName}`,
+			);
 			expect(blogBox).toHaveAttribute(
 				'href',
-				`/blog/${mockedBlogInfo.shortName}`,
+				`/blog/${mockedBlogInfos[0].shortName}`,
+			);
+
+			expect(screen.getAllByTestId('blog-box')).toHaveLength(
+				mockedBlogInfos.length,
 			);
 		});
-
-		expect(screen.getAllByTestId('blog-box')).toHaveLength(
-			mockedBlogsInfo.length,
-		);
 	});
 });

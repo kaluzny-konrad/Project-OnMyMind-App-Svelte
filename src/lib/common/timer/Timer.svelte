@@ -41,7 +41,10 @@
 	}
 </script>
 
-<div class="flex items-center justify-center space-x-4 text-center">
+<div
+	data-testid="timer"
+	class="flex items-center justify-center space-x-4 text-center"
+>
 	<TimeVizualizer {time} />
 	{#if active}
 		{#if isRunning}

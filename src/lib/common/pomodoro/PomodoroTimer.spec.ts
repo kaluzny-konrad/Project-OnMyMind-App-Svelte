@@ -1,6 +1,5 @@
-import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/svelte';
-
+import '@testing-library/jest-dom';
 import PomodoroTimer from './PomodoroTimer.svelte';
 
 describe('PomodoroTimer Component', () => {

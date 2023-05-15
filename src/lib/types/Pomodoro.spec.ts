@@ -1,4 +1,3 @@
-import { vi } from 'vitest';
 import Pomodoro from './Pomodoro';
 
 describe('Pomodoro', () => {
@@ -7,12 +6,12 @@ describe('Pomodoro', () => {
 
 	beforeEach(() => {
 		pomodoro = new Pomodoro(maxTime);
-		vi.useFakeTimers({ shouldAdvanceTime: true });
+		jest.useFakeTimers();
 	});
 
 	afterEach(() => {
-		vi.runOnlyPendingTimers();
-		vi.useRealTimers();
+		jest.runOnlyPendingTimers();
+		jest.useRealTimers();
 	});
 
 	it('initializes with correct values', () => {
@@ -31,41 +30,41 @@ describe('Pomodoro', () => {
 		expect(pomodoro.isRunning).toBe(false);
 	});
 
-	it('returns correct getRemainingTime() when timer is running', async () => {
+	it('returns correct getRemainingTime() when timer is running', () => {
 		const expectedTime = maxTime / 2;
 		pomodoro.start();
-		vi.advanceTimersByTime(expectedTime);
+		jest.advanceTimersByTime(expectedTime);
 		expect(pomodoro.isRunning).toBe(true);
 		expect(pomodoro.getRemainingTime()).toBe(expectedTime);
 	});
 
-	it('returns correct getRemainingTime() when timer is paused', async () => {
+	it('returns correct getRemainingTime() when timer is paused', () => {
 		const expectedTime = maxTime / 2;
 		pomodoro.start();
-		vi.advanceTimersByTime(expectedTime);
+		jest.advanceTimersByTime(expectedTime);
 		pomodoro.stop();
 		expect(pomodoro.isRunning).toBe(false);
 		expect(pomodoro.getRemainingTime()).toBe(expectedTime);
 	});
 
-	it('returns correct getRemainingTime() when timer is paused some time', async () => {
+	it('returns correct getRemainingTime() when timer is paused some time', () => {
 		const expectedTime = maxTime / 2;
 		pomodoro.start();
-		vi.advanceTimersByTime(expectedTime);
+		jest.advanceTimersByTime(expectedTime);
 		pomodoro.stop();
-		vi.advanceTimersByTime(expectedTime);
+		jest.advanceTimersByTime(expectedTime);
 		expect(pomodoro.isRunning).toBe(false);
 		expect(pomodoro.getRemainingTime()).toBe(expectedTime);
 	});
 
-	it('returns correct getRemainingTime() when timer is paused some time and then resumed', async () => {
+	it('returns correct getRemainingTime() when timer is paused some time and then resumed', () => {
 		const expectedTime = maxTime / 2;
 		pomodoro.start();
-		vi.advanceTimersByTime(expectedTime);
+		jest.advanceTimersByTime(expectedTime);
 		pomodoro.stop();
-		vi.advanceTimersByTime(expectedTime);
+		jest.advanceTimersByTime(expectedTime);
 		pomodoro.start();
-		vi.advanceTimersByTime(expectedTime);
+		jest.advanceTimersByTime(expectedTime);
 		expect(pomodoro.isRunning).toBe(true);
 		expect(pomodoro.getRemainingTime()).toBe(0);
 	});

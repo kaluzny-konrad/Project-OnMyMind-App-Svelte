@@ -1,11 +1,11 @@
 import type { Writable } from 'svelte/store';
 import { writable } from 'svelte/store';
-import { browser } from '$app/environment';
 import MindTimer from '../types/MindTimer';
 
 const storageName = 'timers-list';
 
-const data: MindTimer[] = browser
+const isBrowser = typeof window !== 'undefined';
+const data: MindTimer[] = isBrowser
 	? JSON.parse(window?.localStorage?.getItem(storageName) as string) ?? []
 	: [];
 
@@ -20,7 +20,7 @@ export const timers: Writable<MindTimer[]> = writable(
 );
 
 timers.subscribe((value: MindTimer[]) => {
-	if (browser) {
+	if (isBrowser) {
 		localStorage?.setItem(storageName, JSON.stringify(value));
 	}
 });

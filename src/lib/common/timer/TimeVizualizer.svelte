@@ -14,6 +14,6 @@
 	}
 </script>
 
-<div class="text-4xl font-bold">
+<div class="text-4xl font-bold" data-testid="time-vizualizer">
 	{formatTime(time)}
 </div>

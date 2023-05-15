@@ -1,19 +1,19 @@
 import { v4 as uuidv4 } from 'uuid';
 import type { Writable } from 'svelte/store';
 import { writable } from 'svelte/store';
-import { browser } from '$app/environment';
 import type Mind from '../types/Mind';
 
 const storageName = 'minds-list';
 
-const data: Mind[] = browser
+const isBrowser = typeof window !== 'undefined';
+const data: Mind[] = isBrowser
 	? JSON.parse(window.localStorage.getItem(storageName) as string) ?? []
 	: [];
 
 export const minds: Writable<Mind[]> = writable(data);
 
 minds.subscribe((value: Mind[]) => {
-	if (browser) {
+	if (isBrowser) {
 		localStorage.setItem(storageName, JSON.stringify(value));
 	}
 });

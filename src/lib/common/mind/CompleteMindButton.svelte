@@ -17,6 +17,7 @@
 	type="button"
 	on:click={() => toggleComplete()}
 	class="round-button green-button"
+	data-testid="complete-task"
 >
 	<span class="sr-only">Complete task</span>
 	<Icon><CompletePath /></Icon>
