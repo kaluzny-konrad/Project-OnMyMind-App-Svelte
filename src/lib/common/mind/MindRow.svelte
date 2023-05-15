@@ -9,7 +9,7 @@
 	export let mind: Mind;
 </script>
 
-<div class="wide-component">
+<div class="wide-component" data-testid="mind-row">
 	<div class="wide-row">
 		<EditMindInput {mind} />
 		<Timer mindId={mind.id} active={!mind.isComplete} />

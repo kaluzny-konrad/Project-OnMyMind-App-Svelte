@@ -18,6 +18,6 @@
 	on:click={() => deleteMind()}
 	class="round-button red-button"
 >
-	<span class="sr-only">Delete task</span>
+	<span class="sr-only" data-testid="delete-task">Delete task</span>
 	<Icon><DeletePath /></Icon>
 </button>

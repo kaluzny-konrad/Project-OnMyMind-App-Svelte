@@ -14,6 +14,7 @@
 	id={`${mind.id}-checkbox`}
 	type="text"
 	placeholder="On my mind is..."
+	data-testid="edit-task"
 	bind:value={mind.name}
 	on:input={() => nameChanged()}
 	class="input-text"

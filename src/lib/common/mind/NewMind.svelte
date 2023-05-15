@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { addMindToStore } from '../../stores/mindStore.js';
+	import { addMindToStore } from '../../stores/mindStore';
 	import Icon from '../../icons/Icon.svelte';
 	import AddPath from '../../icons/AddPath.svelte';
 	import TimeSum from '../timer/TimeSum.svelte';
@@ -21,7 +21,7 @@
 	}
 </script>
 
-<div class="wide-component">
+<div class="wide-component" data-testid="new-mind">
 	<div class="wide-row">
 		<label for="mind-input" class="sr-only">New task</label>
 		<input
