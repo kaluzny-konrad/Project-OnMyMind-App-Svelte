@@ -27,11 +27,17 @@
 		<input
 			type="text"
 			id="mind-input"
+			data-testid="mind-input"
 			on:keydown={keydownOnInput}
 			placeholder="On my mind is..."
 			class="input-text"
 		/>
-		<button type="button" on:click={addMind} class="round-button blue-button">
+		<button
+			type="button"
+			data-testid="add-task"
+			on:click={addMind}
+			class="round-button blue-button"
+		>
 			<span class="sr-only">Add task</span>
 			<Icon><AddPath /></Icon>
 		</button>
