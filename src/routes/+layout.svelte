@@ -11,12 +11,11 @@
 
 	import { onMount } from 'svelte';
 	import { page } from '$app/stores';
-	import POST from './api/speed-insight/+server';
 
 	onMount(() => {
 		let path = $page.route.id;
 		if (path) {
-			POST(path);
+			console.log('Page path: ' + path);
 		}
 	});
 </script>
