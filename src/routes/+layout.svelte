@@ -9,19 +9,14 @@
 
 	inject({ mode: dev ? 'development' : 'production' });
 
-	import { webVitals } from '../vitals.js';
 	import { onMount } from 'svelte';
 	import { page } from '$app/stores';
+	import POST from './api/speed-insight/+server';
 
 	onMount(() => {
-		let analyticsId = import.meta.env.VERCEL_ANALYTICS_ID;
-		console.log('analyticsId', analyticsId);
-		if ('navigator' in window && analyticsId) {
-			webVitals({
-				analyticsId: analyticsId,
-				debug: true,
-				path: $page.route.id, // '/blog/[slug]', // Odpowiednia ścieżka
-			});
+		let path = $page.route.id;
+		if (path) {
+			POST(path);
 		}
 	});
 </script>
