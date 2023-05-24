@@ -14,6 +14,8 @@ test('Header navigation - Index', async ({ page }) => {
 	await page.waitForLoadState('networkidle');
 
 	await expect(page).toHaveTitle('OnMyMind');
+
+	await page.mouse.move(0, 0);
 	expect(await page.screenshot({ fullPage: true })).toMatchSnapshot(fileName);
 });
 
@@ -24,6 +26,8 @@ test('Header navigation - Logo', async ({ page }) => {
 	await page.waitForLoadState('networkidle');
 
 	await expect(page).toHaveTitle('OnMyMind');
+
+	await page.mouse.move(0, 0);
 	expect(await page.screenshot({ fullPage: true })).toMatchSnapshot(fileName);
 });
 
@@ -34,6 +38,8 @@ test('Header navigation - AppLink', async ({ page }) => {
 	await page.waitForLoadState('networkidle');
 
 	await expect(page).toHaveTitle('OnMyMind');
+
+	await page.mouse.move(0, 0);
 	expect(await page.screenshot({ fullPage: true })).toMatchSnapshot(fileName);
 });
 
@@ -44,6 +50,7 @@ test('Header navigation - BlogLink', async ({ page }) => {
 	await page.waitForLoadState('networkidle');
 
 	await expect(page).toHaveTitle('OnMyMind Blog');
+	await page.mouse.move(0, 0);
 	expect(await page.screenshot({ fullPage: true })).toMatchSnapshot(fileName);
 });
 
@@ -54,5 +61,7 @@ test('Header navigation - About link', async ({ page }) => {
 	await page.waitForLoadState('networkidle');
 
 	await expect(page).toHaveTitle('OnMyMind About');
+
+	await page.mouse.move(0, 0);
 	expect(await page.screenshot({ fullPage: true })).toMatchSnapshot(fileName);
 });
