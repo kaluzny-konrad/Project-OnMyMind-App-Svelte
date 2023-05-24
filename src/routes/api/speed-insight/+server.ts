@@ -1,7 +1,7 @@
 import { webVitals } from '../../../vitals';
 
 export default function POST(path: string) {
-	let analyticsId = import.meta.env.VERCEL_ANALYTICS_ID;
+	const analyticsId = import.meta.env.VERCEL_ANALYTICS_ID;
 	console.log('analyticsId', analyticsId);
 	if ('navigator' in window && analyticsId) {
 		webVitals({
