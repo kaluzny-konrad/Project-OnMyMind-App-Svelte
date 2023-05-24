@@ -8,6 +8,22 @@
 	import { inject } from '@vercel/analytics';
 
 	inject({ mode: dev ? 'development' : 'production' });
+
+	import { webVitals } from '../vitals.js';
+	import { onMount } from 'svelte';
+	import { page } from '$app/stores';
+
+	onMount(() => {
+		let analyticsId = import.meta.env.VERCEL_ANALYTICS_ID;
+		console.log('analyticsId', analyticsId);
+		if ('navigator' in window && analyticsId) {
+			webVitals({
+				analyticsId: analyticsId,
+				debug: true,
+				path: $page.route.id, // '/blog/[slug]', // Odpowiednia ścieżka
+			});
+		}
+	});
 </script>
 
 <Header />
