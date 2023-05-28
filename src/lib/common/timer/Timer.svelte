@@ -6,6 +6,7 @@
 		startTimerInStore,
 		stopTimerInStore,
 	} from '../../stores/timerStore';
+	import { moveMindToTopInStore } from '../../stores/mindStore';
 	import type MindTimer from '../../types/MindTimer';
 	import TimeVizualizer from './TimeVizualizer.svelte';
 
@@ -27,6 +28,7 @@
 
 	function startTimer() {
 		startTimerInStore(mindId);
+		moveMindToTopInStore(mindId);
 		requestAnimationFrame(refreshTimer);
 	}
 
