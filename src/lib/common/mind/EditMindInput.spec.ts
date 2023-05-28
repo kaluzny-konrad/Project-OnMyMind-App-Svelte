@@ -7,14 +7,8 @@ import {
 	changeMindNameInStore,
 } from '../../stores/mindStore';
 import type Mind from '../../types/Mind';
-import {
-	timers,
-	addTimerToStore,
-	startTimerInStore,
-} from '../../stores/timerStore';
 
 import EditMindInput from './EditMindInput.svelte';
-import type MindTimer from '$lib/types/MindTimer';
 
 jest.mock('../../stores/mindStore', () => ({
 	...jest.requireActual('../../stores/mindStore'),

@@ -6,8 +6,6 @@ import {
 	addMindToStore,
 	minds,
 } from '../../stores/mindStore';
-import ResetPath from '../../icons/ResetPath.svelte';
-import Icon from '../../icons/Icon.svelte';
 
 import ReopenMindButton from './ReopenMindButton.svelte';
 import type Mind from '../../types/Mind';
