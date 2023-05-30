@@ -13,7 +13,8 @@
 	import { webVitals } from '../lib/webvitals';
 	import { page } from '$app/stores';
 
-	const analyticsId = import.meta.env.VITE_VERCEL_ANALYTICS_ID as string;
+	const analyticsId: string = import.meta.env.VERCEL_ANALYTICS_ID;
+
 	onMount(() => {
 		const path = $page.url.pathname;
 		const params = $page.params;
