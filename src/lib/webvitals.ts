@@ -1,5 +1,5 @@
 import type { Metric } from 'web-vitals';
-import { getCLS, getFCP, getFID, getLCP, getTTFB } from 'web-vitals';
+import { onCLS, onFCP, onFID, onLCP, onTTFB } from 'web-vitals';
 
 type AnalyticsOptions = {
 	params: Record<string, string>;
@@ -60,11 +60,11 @@ function sendToAnalytics(metric: Metric, options: AnalyticsOptions) {
 
 export function webVitals(options: AnalyticsOptions): void {
 	try {
-		getFID((metric: Metric) => sendToAnalytics(metric, options));
-		getTTFB((metric: Metric) => sendToAnalytics(metric, options));
-		getLCP((metric: Metric) => sendToAnalytics(metric, options));
-		getCLS((metric: Metric) => sendToAnalytics(metric, options));
-		getFCP((metric: Metric) => sendToAnalytics(metric, options));
+		onFID((metric: Metric) => sendToAnalytics(metric, options));
+		onTTFB((metric: Metric) => sendToAnalytics(metric, options));
+		onLCP((metric: Metric) => sendToAnalytics(metric, options));
+		onCLS((metric: Metric) => sendToAnalytics(metric, options));
+		onFCP((metric: Metric) => sendToAnalytics(metric, options));
 	} catch (err) {
 		console.error('[Analytics]', err);
 	}
