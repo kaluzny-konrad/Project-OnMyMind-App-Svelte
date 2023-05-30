@@ -5,8 +5,7 @@
 	"scripts": {
 		"dev": "vite dev",
 		"start": "npm run build && npm run preview",
-		"prebuild": "npm run format && npm run lint && npm run check",
-		"build": "vite build && npm run test:unit",
+		"build": "vite build",
 		"preview": "vite preview",
 		"test": "npm run test:unit && npm run test:e2e",
 		"test:e2e": "playwright test",
