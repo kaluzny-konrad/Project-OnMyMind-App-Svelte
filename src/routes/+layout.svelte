@@ -19,6 +19,8 @@
 		const response = await fetch('/speed');
 		const result = await response.json();
 		console.log(result);
+		console.log($page.url.pathname);
+		console.log($page.params);
 		if (browser) {
 			webVitals({
 				path: $page.url.pathname,
