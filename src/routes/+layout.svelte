@@ -17,7 +17,10 @@
 	onMount(() => {
 		const path = $page.url.pathname;
 		const params = $page.params;
-		console.log('webVitals', path, params, analyticsId);
+		console.log('webVitals');
+		console.log(path);
+		console.log(params);
+		console.log(analyticsId);
 		if (analyticsId) webVitals({ path, params, analyticsId });
 	});
 </script>
