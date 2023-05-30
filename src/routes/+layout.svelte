@@ -18,7 +18,7 @@
 	const analyticsId3: string = import.meta.env.VITE_VERCEL_ANALYTICS_ID;
 
 	onMount(() => {
-		if (browser && analyticsId) {
+		if (browser) {
 			console.log('analyticsId', analyticsId);
 			console.log('analyticsId2', analyticsId2);
 			console.log('analyticsId3', analyticsId3);
