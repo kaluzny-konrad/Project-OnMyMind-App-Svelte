@@ -46,12 +46,16 @@ function sendToAnalytics(metric: Metric, options: AnalyticsOptions) {
 		// This content type is necessary for `sendBeacon`:
 		type: 'application/x-www-form-urlencoded',
 	});
-	fetch(vitalsUrl, {
-		body: blob,
-		method: 'POST',
-		credentials: 'omit',
-		keepalive: true,
-	});
+	if (navigator.sendBeacon) {
+		navigator.sendBeacon(vitalsUrl, blob);
+	} else {
+		fetch(vitalsUrl, {
+			body: blob,
+			method: 'POST',
+			credentials: 'omit',
+			keepalive: true,
+		});
+	}
 }
 
 export function webVitals(options: AnalyticsOptions): void {
