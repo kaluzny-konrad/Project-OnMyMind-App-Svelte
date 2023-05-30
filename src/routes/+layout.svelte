@@ -4,7 +4,7 @@
 	import Header from '../lib/common/header/Header.svelte';
 	import Footer from '../lib/common/footer/Footer.svelte';
 	import CookieConsent from '../lib/common/cookie/CookieConsent.svelte';
-	import { dev } from '$app/environment';
+	import { browser, dev } from '$app/environment';
 	import { inject } from '@vercel/analytics';
 	import { onMount } from 'svelte';
 
@@ -13,20 +13,21 @@
 	import { webVitals } from '../lib/webvitals';
 	import { page } from '$app/stores';
 
-	const analyticsId: string = import.meta.env.PUBLIC_VERCEL_ANALYTICS_ID;
-	const analyticsId2: string = import.meta.env.VERCEL_ANALYTICS_ID;
+	const analyticsId: string = import.meta.env.VERCEL_ANALYTICS_ID;
+	const analyticsId2: string = import.meta.env.PUBLIC_VERCEL_ANALYTICS_ID;
 	const analyticsId3: string = import.meta.env.VITE_VERCEL_ANALYTICS_ID;
 
-	onMount(() => {
-		const path = $page.url.pathname;
-		const params = $page.params;
-
+	$: if (browser && analyticsId) {
 		console.log('analyticsId', analyticsId);
 		console.log('analyticsId2', analyticsId2);
 		console.log('analyticsId3', analyticsId3);
 
-		if (analyticsId) webVitals({ path, params, analyticsId });
-	});
+		webVitals({
+			path: $page.url.pathname,
+			params: $page.params,
+			analyticsId,
+		});
+	}
 </script>
 
 <Header />
