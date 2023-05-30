@@ -60,11 +60,11 @@ function sendToAnalytics(metric: Metric, options: AnalyticsOptions) {
 
 export function webVitals(options: AnalyticsOptions): void {
 	try {
-		getFID((metric) => sendToAnalytics(metric, options));
-		getTTFB((metric) => sendToAnalytics(metric, options));
-		getLCP((metric) => sendToAnalytics(metric, options));
-		getCLS((metric) => sendToAnalytics(metric, options));
-		getFCP((metric) => sendToAnalytics(metric, options));
+		getFID((metric: any) => sendToAnalytics(metric, options));
+		getTTFB((metric: any) => sendToAnalytics(metric, options));
+		getLCP((metric: any) => sendToAnalytics(metric, options));
+		getCLS((metric: any) => sendToAnalytics(metric, options));
+		getFCP((metric: any) => sendToAnalytics(metric, options));
 	} catch (err) {
 		console.error('[Analytics]', err);
 	}
