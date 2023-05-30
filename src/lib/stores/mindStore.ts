@@ -62,3 +62,13 @@ export const changeMindNameInStore = (id: string, name: string): void => {
 		});
 	});
 };
+
+export const moveMindToTopInStore = (id: string): void => {
+	minds.update((currentMinds: Mind[]) => {
+		const mindToMove = currentMinds.find((mind: Mind) => mind.id === id);
+		if (!mindToMove) return currentMinds;
+		const updatedMinds = currentMinds.filter((mind: Mind) => mind.id !== id);
+		updatedMinds.unshift(mindToMove);
+		return updatedMinds;
+	});
+};
