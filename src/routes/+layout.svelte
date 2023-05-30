@@ -14,14 +14,17 @@
 	import { page } from '$app/stores';
 
 	const analyticsId: string = import.meta.env.PUBLIC_VERCEL_ANALYTICS_ID;
+	const analyticsId2: string = import.meta.env.VERCEL_ANALYTICS_ID;
+	const analyticsId3: string = import.meta.env.VITE_VERCEL_ANALYTICS_ID;
 
 	onMount(() => {
 		const path = $page.url.pathname;
 		const params = $page.params;
-		console.log('webVitals');
-		console.log(path);
-		console.log(params);
-		console.log(analyticsId);
+
+		console.log('analyticsId', analyticsId);
+		console.log('analyticsId2', analyticsId2);
+		console.log('analyticsId3', analyticsId3);
+
 		if (analyticsId) webVitals({ path, params, analyticsId });
 	});
 </script>
