@@ -7,6 +7,7 @@
 		"start": "npm run build && npm run preview",
 		"build": "vite build",
 		"preview": "vite preview",
+		"prepare": "svelte-kit sync",
 		"test": "npm run test:unit && npm run test:e2e",
 		"test:e2e": "playwright test",
 		"test:unit": "jest",
