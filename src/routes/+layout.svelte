@@ -17,17 +17,19 @@
 	const analyticsId2: string = import.meta.env.PUBLIC_VERCEL_ANALYTICS_ID;
 	const analyticsId3: string = import.meta.env.VITE_VERCEL_ANALYTICS_ID;
 
-	$: if (browser && analyticsId) {
-		console.log('analyticsId', analyticsId);
-		console.log('analyticsId2', analyticsId2);
-		console.log('analyticsId3', analyticsId3);
+	onMount(() => {
+		if (browser && analyticsId) {
+			console.log('analyticsId', analyticsId);
+			console.log('analyticsId2', analyticsId2);
+			console.log('analyticsId3', analyticsId3);
 
-		webVitals({
-			path: $page.url.pathname,
-			params: $page.params,
-			analyticsId,
-		});
-	}
+			webVitals({
+				path: $page.url.pathname,
+				params: $page.params,
+				analyticsId,
+			});
+		}
+	});
 </script>
 
 <Header />
