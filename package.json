@@ -8,6 +8,7 @@
 		"prebuild": "npm run format && npm run lint && npm run check",
 		"build": "vite build && npm run test:unit",
 		"preview": "vite preview",
+		"prepare": "svelte-kit sync",
 		"test": "npm run test:unit && npm run test:e2e",
 		"test:e2e": "playwright test",
 		"test:unit": "jest",
