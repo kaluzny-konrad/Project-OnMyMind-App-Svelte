@@ -4,12 +4,12 @@
 	import Blog from '../../../lib/common/blog/Blog.svelte';
 
 	export let data;
-	const { blogContentPromise: blogContent, blogInfo } = data;
+	const { blogContent, blogInfo } = data;
 </script>
 
 <svelte:head>
-	<title>OnMyMind Blog</title>
-	<meta name="description" content="Blog about app OnMyMind." />
+	<title>Blog - {blogInfo?.title}</title>
+	<meta name="description" content={blogInfo?.description} />
 </svelte:head>
 
 <div class="wide-page">
