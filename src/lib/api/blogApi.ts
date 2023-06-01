@@ -7,18 +7,26 @@ export async function getBlogsInfo(): Promise<BlogInfo[]> {
 	return blogsInfo;
 }
 
-export async function getBlogInfo(shortName: string): Promise<BlogInfo> {
+export async function getBlogInfo(
+	fetch: any,
+	shortName: string,
+): Promise<BlogInfo | null> {
 	const response = await fetch(`/data/blogs/blogsInfo.json`);
+	if (response.status === 404) return null;
 	const blogsInfo = (await response.json()) as BlogInfo[];
 	const blogInfo = blogsInfo.find(
 		(blogInfo: BlogInfo) => blogInfo.shortName === shortName,
 	);
-	if (!blogInfo) return { shortName: '', title: '', description: '', date: '' };
+	if (!blogInfo) return null;
 	return blogInfo;
 }
 
-export async function getBlogContent(shortName: string): Promise<BlogContent> {
+export async function getBlogContent(
+	fetch: any,
+	shortName: string,
+): Promise<BlogContent | null> {
 	const response = await fetch(`/data/blogs/${shortName}/blogContent.json`);
+	if (response.status === 404) return null;
 	const blogContent = (await response.json()) as BlogContent;
 	return blogContent;
 }

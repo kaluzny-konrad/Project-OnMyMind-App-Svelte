@@ -34,22 +34,17 @@ describe('Blog Info API - correct data on endpoint', () => {
 
 	describe('getBlogInfo', () => {
 		it('fetches and returns blog info for the given short name', async () => {
-			const blogInfo = await getBlogInfo(mockedBlogShortName);
+			const blogInfo = await getBlogInfo(global.fetch, mockedBlogShortName);
 
 			expect(fetch).toHaveBeenCalledWith(blogsInfoPath);
 			expect(blogInfo).toEqual(mockedBlogInfos[0]);
 		});
 
 		it('returns empty blog info when the blog is not found', async () => {
-			const blogInfo = await getBlogInfo('not-exists');
+			const blogInfo = await getBlogInfo(global.fetch, 'not-exists');
 
 			expect(fetch).toHaveBeenCalledWith(blogsInfoPath);
-			expect(blogInfo).toEqual({
-				shortName: '',
-				title: '',
-				description: '',
-				date: '',
-			});
+			expect(blogInfo).toEqual(null);
 		});
 	});
 });
