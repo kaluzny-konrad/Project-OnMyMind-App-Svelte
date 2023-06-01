@@ -1,8 +1,5 @@
 <script lang="ts">
-	import type BlogContent from '../../../lib/types/BlogContent';
-	import type BlogInfo from '../../../lib/types/BlogInfo';
 	import Blog from '../../../lib/common/blog/Blog.svelte';
-
 	export let data;
 	const { blogContent, blogInfo } = data;
 </script>
@@ -13,7 +10,7 @@
 </svelte:head>
 
 <div class="wide-page">
-	{#if blogContent}
+	{#if blogContent && blogInfo}
 		<Blog {blogContent} {blogInfo} />
 	{/if}
 </div>
