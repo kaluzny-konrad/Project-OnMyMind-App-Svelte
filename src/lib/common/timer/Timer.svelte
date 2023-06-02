@@ -50,14 +50,22 @@
 	<TimeVizualizer {time} />
 	{#if active}
 		{#if isRunning}
-			<button class="round-button gray-button" on:click={pauseTimer}>
+			<button
+				class="round-button gray-button"
+				data-testid="pause-timer"
+				on:click={pauseTimer}
+			>
 				<span class="sr-only">Stop timer</span>
 				<Icon>
 					<PausePath />
 				</Icon>
 			</button>
 		{:else}
-			<button class="round-button blue-button" on:click={startTimer}>
+			<button
+				class="round-button blue-button"
+				data-testid="start-timer"
+				on:click={startTimer}
+			>
 				<span class="sr-only">Run timer</span>
 				<Icon>
 					<StartPath />

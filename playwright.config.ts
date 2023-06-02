@@ -11,21 +11,23 @@ const config: PlaywrightTestConfig = {
 	forbidOnly: !!process.env.CI,
 
 	// Retry on CI only.
-	retries: process.env.CI ? 2 : 1,
+	retries: process.env.CI ? 2 : 0,
 
 	// Opt out of parallel tests on CI.
 	workers: process.env.CI ? 1 : undefined,
+
+	timeout: 15000,
 
 	// Reporter to use
 	reporter: 'html',
 
 	use: {
 		// Base URL to use in actions like `await page.goto('/')`.
-		baseURL: process.env.VERCEL_URL || 'http://localhost:4173/',
-		//baseURL: process.env.VERCEL_URL || 'http://localhost:5173/',
+		//baseURL: process.env.VERCEL_URL || 'http://localhost:4173/',
+		baseURL: process.env.VERCEL_URL || 'http://localhost:5173/',
 
 		// Collect trace when retrying the failed test.
-		trace: 'on-first-retry',
+		trace: 'off',
 	},
 	// Configure projects for major browsers.
 	projects: [

@@ -5,13 +5,13 @@ import {
 	addMindToStore,
 	minds,
 	changeMindNameInStore,
-} from '../../stores/mindStore';
-import type Mind from '../../types/Mind';
+} from '../../../stores/mindStore';
+import type Mind from '../../../types/Mind';
 
 import EditMindInput from './EditMindInput.svelte';
 
-jest.mock('../../stores/mindStore', () => ({
-	...jest.requireActual('../../stores/mindStore'),
+jest.mock('../../../stores/mindStore', () => ({
+	...jest.requireActual('../../../stores/mindStore'),
 	changeMindNameInStore: jest.fn(),
 }));
 

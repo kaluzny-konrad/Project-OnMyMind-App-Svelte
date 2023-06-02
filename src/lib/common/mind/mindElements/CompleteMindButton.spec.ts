@@ -2,13 +2,13 @@ import { render, screen } from '@testing-library/svelte';
 import '@testing-library/jest-dom';
 import CompleteMindButton from './CompleteMindButton.svelte';
 
-import type Mind from '../../types/Mind';
-import { addMindToStore, minds } from '../../stores/mindStore';
+import type Mind from '../../../types/Mind';
+import { addMindToStore, minds } from '../../../stores/mindStore';
 import {
 	timers,
 	addTimerToStore,
 	startTimerInStore,
-} from '../../stores/timerStore';
+} from '../../../stores/timerStore';
 
 describe('CompleteMindButton Component', () => {
 	const mindName = 'test';
