@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { minds } from '../../stores/mindStore';
-	import MindRows from './MindRows.svelte';
+	import MindList from './MindList.svelte';
 	import NewMind from './NewMind.svelte';
 
 	$: openMinds = $minds.filter((mind) => mind.isComplete === false);
@@ -9,6 +9,8 @@
 
 <NewMind />
 
-<MindRows minds={openMinds} title="In progress" />
+<div class="wide-component-title">In progress</div>
+<MindList minds={openMinds} />
 
-<MindRows minds={closedMinds} title="Completed" />
+<div class="wide-component-title">Completed</div>
+<MindList minds={closedMinds} />

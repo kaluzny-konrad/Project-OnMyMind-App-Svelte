@@ -5,10 +5,10 @@ import {
 	toggleCompleteInStore,
 	addMindToStore,
 	minds,
-} from '../../stores/mindStore';
+} from '../../../stores/mindStore';
 
 import ReopenMindButton from './ReopenMindButton.svelte';
-import type Mind from '../../types/Mind';
+import type Mind from '../../../types/Mind';
 
 describe('ReopenMindButton Component', () => {
 	const mindName = 'test';

@@ -1,13 +1,13 @@
 import { render, screen } from '@testing-library/svelte';
 import '@testing-library/jest-dom';
 
-import { addMindToStore, minds } from '../../stores/mindStore';
-import type Mind from '../../types/Mind';
+import { addMindToStore, minds } from '../../../stores/mindStore';
+import type Mind from '../../../types/Mind';
 import {
 	timers,
 	addTimerToStore,
 	startTimerInStore,
-} from '../../stores/timerStore';
+} from '../../../stores/timerStore';
 
 import DeleteMindButton from './DeleteMindButton.svelte';
 import type MindTimer from '$lib/types/MindTimer';

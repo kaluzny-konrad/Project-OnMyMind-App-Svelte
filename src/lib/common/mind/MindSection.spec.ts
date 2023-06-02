@@ -53,10 +53,10 @@ describe('MindSection Component', () => {
 		expect(screen.queryByTestId('new-mind')).toBeInTheDocument();
 
 		const openMindTitle = screen.queryByText('In progress');
-		expect(openMindTitle).not.toBeInTheDocument();
+		expect(openMindTitle).toBeInTheDocument();
 
 		const closedMindTitle = screen.queryByText('Completed');
-		expect(closedMindTitle).not.toBeInTheDocument();
+		expect(closedMindTitle).toBeInTheDocument();
 	});
 
 	it('renders NewMind and MindRow for open minds when there are no closed minds', () => {
@@ -72,7 +72,7 @@ describe('MindSection Component', () => {
 		expect(openMindTitle).toBeInTheDocument();
 
 		const closedMindTitle = screen.queryByText('Completed');
-		expect(closedMindTitle).not.toBeInTheDocument();
+		expect(closedMindTitle).toBeInTheDocument();
 	});
 
 	it('renders NewMind and MindRow for closed minds when there are no open minds', () => {
@@ -85,7 +85,7 @@ describe('MindSection Component', () => {
 		expect(screen.queryByTestId('new-mind')).toBeInTheDocument();
 
 		const openMindTitle = screen.queryByText('In progress');
-		expect(openMindTitle).not.toBeInTheDocument();
+		expect(openMindTitle).toBeInTheDocument();
 
 		const closedMindTitle = screen.getByText('Completed');
 		expect(closedMindTitle).toBeInTheDocument();
