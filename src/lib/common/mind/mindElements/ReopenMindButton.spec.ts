@@ -29,13 +29,15 @@ describe('ReopenMindButton Component', () => {
 	}
 
 	it('renders the component with reopen button', () => {
-		render(ReopenMindButton, { mind });
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		render(ReopenMindButton as any, { mind });
 
 		expect(screen.getByTestId('reopen-task')).toBeInTheDocument();
 	});
 
 	it('calls toggleCompleteInStore on button click', async () => {
-		render(ReopenMindButton, { mind });
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		render(ReopenMindButton as any, { mind });
 		expect(mind.isComplete).toBe(true);
 
 		const reopenButton = screen.getByTestId('reopen-task');

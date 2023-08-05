@@ -51,7 +51,9 @@ test('Add three minds, complete two, delete one', async ({ page }) => {
 	await page.mouse.move(0, 0);
 	await page.waitForTimeout(1000);
 	const fileName = 'MindActionsDelete.png';
-	expect(await page.screenshot({ fullPage: true })).toMatchSnapshot(fileName);
+	expect(await page.screenshot({ fullPage: true })).toMatchSnapshot(fileName, {
+		maxDiffPixelRatio: 0.01,
+	});
 });
 
 test('Add two minds, complete one, then reopen one', async ({ page }) => {

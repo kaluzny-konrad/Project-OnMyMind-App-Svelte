@@ -19,7 +19,8 @@ describe('MindRows Component', () => {
 				isComplete: true,
 			},
 		];
-		render(MindList, { minds });
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		render(MindList as any, { minds });
 
 		const mindRows = screen.getAllByTestId('mind-row');
 		expect(mindRows).toHaveLength(minds.length);
@@ -37,7 +38,8 @@ describe('MindRows Component', () => {
 	});
 
 	it('does not render MindRow when minds array is empty', () => {
-		render(MindList, { minds: [] });
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		render(MindList as any, { minds: [] });
 
 		const mindRows = screen.queryAllByTestId('mind-row');
 		expect(mindRows).toHaveLength(0);
@@ -51,7 +53,8 @@ describe('MindRows Component', () => {
 				isComplete: false,
 			},
 		];
-		render(MindList, { minds });
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		render(MindList as any, { minds });
 		expect(screen.queryByTestId('timer')).toBeInTheDocument();
 		expect(screen.queryByTestId('edit-task')).toBeInTheDocument();
 		expect(screen.queryByTestId('complete-task')).toBeInTheDocument();
@@ -67,7 +70,8 @@ describe('MindRows Component', () => {
 				isComplete: true,
 			},
 		];
-		render(MindList, { minds });
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		render(MindList as any, { minds });
 		expect(screen.queryByTestId('timer')).toBeInTheDocument();
 		expect(screen.queryByTestId('edit-task')).toBeInTheDocument();
 		expect(screen.queryByTestId('delete-task')).toBeInTheDocument();

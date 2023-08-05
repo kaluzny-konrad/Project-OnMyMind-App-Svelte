@@ -33,12 +33,14 @@ describe('EditMindInput Component', () => {
 	}
 
 	it('renders the component with standard value', () => {
-		render(EditMindInput, { mind: mind });
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		render(EditMindInput as any, { mind: mind });
 		expect(screen.getByTestId('edit-task')).toBeInTheDocument();
 	});
 
 	it('triggers the change of mind name', async () => {
-		render(EditMindInput, { mind: mind });
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		render(EditMindInput as any, { mind: mind });
 		expect(mind.name).toBe(mindName);
 		const expectedName = 'new name';
 

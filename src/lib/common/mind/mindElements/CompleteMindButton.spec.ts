@@ -28,12 +28,14 @@ describe('CompleteMindButton Component', () => {
 	}
 
 	it('renders the component with standard value', () => {
-		render(CompleteMindButton, { mind: mind });
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		render(CompleteMindButton as any, { mind: mind });
 		expect(screen.getByTestId('complete-task')).toBeInTheDocument();
 	});
 
 	it('triggers the complete event', async () => {
-		render(CompleteMindButton, { mind: mind });
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		render(CompleteMindButton as any, { mind: mind });
 		const button = screen.getByTestId('complete-task');
 
 		button.click();
@@ -47,7 +49,8 @@ describe('CompleteMindButton Component', () => {
 		startTimerInStore(mind.id);
 		expect(timer.isRunning).toBe(true);
 
-		render(CompleteMindButton, { mind: mind });
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		render(CompleteMindButton as any, { mind: mind });
 		const button = screen.getByTestId('complete-task');
 
 		button.click();
