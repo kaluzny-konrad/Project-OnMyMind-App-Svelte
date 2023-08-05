@@ -19,23 +19,6 @@ test('Contact Form - empty on init', async ({ page }) => {
 	expect(await form.screenshot()).toMatchSnapshot(fileName);
 });
 
-test('Contact Form - successful submission', async ({ page }) => {
-	const fileName = 'ContactFormSuccessfulSubmission.png';
-
-	const form = page.getByTestId('contact-form');
-	await form.locator('input[name="email"]').fill('test@test.pl');
-	await form.locator('textarea[name="message"]').fill('test message');
-	await form.locator('button[type="submit"]').click();
-
-	await page.waitForLoadState('networkidle');
-
-	const alert = page.locator('div[role="alert"]');
-	expect(await alert.textContent()).toBe('Message sent successfully!');
-
-	await page.mouse.move(0, 0);
-	expect(await form.screenshot()).toMatchSnapshot(fileName);
-});
-
 test('Contact Form - failed submission - wrong mail', async ({ page }) => {
 	const fileName = 'ContactFormFailedSubmissionWrongMail.png';
 

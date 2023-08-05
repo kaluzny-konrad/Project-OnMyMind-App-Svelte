@@ -1,5 +1,6 @@
 import type BlogInfo from '../types/BlogInfo';
 import type BlogContent from '../types/BlogContent';
+type Fetch = typeof fetch;
 
 export async function getBlogsInfo(): Promise<BlogInfo[]> {
 	const response = await fetch(`/data/blogs/blogsInfo.json`);
@@ -8,7 +9,7 @@ export async function getBlogsInfo(): Promise<BlogInfo[]> {
 }
 
 export async function getBlogInfo(
-	fetch: any,
+	fetch: Fetch,
 	shortName: string,
 ): Promise<BlogInfo | null> {
 	const response = await fetch(`/data/blogs/blogsInfo.json`);
@@ -22,7 +23,7 @@ export async function getBlogInfo(
 }
 
 export async function getBlogContent(
-	fetch: any,
+	fetch: Fetch,
 	shortName: string,
 ): Promise<BlogContent | null> {
 	const response = await fetch(`/data/blogs/${shortName}/blogContent.json`);
