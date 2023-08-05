@@ -22,7 +22,15 @@
 			{#if mind.isComplete}
 				<div>
 					{#if mind.completeDateTime}
-						<p class="text-xs text-center font-semibold">{mind.completeDateTime.toLocaleString()}</p>
+						<p class="text-xs text-center font-semibold">
+							{new Date(mind.completeDateTime).toLocaleString([], {
+								year: 'numeric',
+								month: 'short',
+								day: '2-digit',
+								hour: '2-digit',
+								minute: '2-digit',
+							})}
+						</p>
 					{/if}
 					<ReopenMindButton {mind} />
 					<DeleteMindButton {mind} />
