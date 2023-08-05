@@ -30,7 +30,8 @@ describe('MindSection Component', () => {
 	it('renders NewMind and MindRows for open and closed minds', () => {
 		const mockMinds: Mind[] = [openMind1, closedMind1, openMind2, closedMind2];
 		minds.set(mockMinds);
-		render(MindSection);
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		render(MindSection as any);
 
 		expect(screen.queryAllByTestId('mind-row').length).toBe(4);
 
@@ -46,7 +47,8 @@ describe('MindSection Component', () => {
 	it('renders only NewMind when there are no minds', () => {
 		const mockMinds: Mind[] = [];
 		minds.set(mockMinds);
-		render(MindSection);
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		render(MindSection as any);
 
 		expect(screen.queryAllByTestId('mind-row').length).toBe(0);
 
@@ -62,7 +64,8 @@ describe('MindSection Component', () => {
 	it('renders NewMind and MindRow for open minds when there are no closed minds', () => {
 		const mockMinds: Mind[] = [openMind1, openMind2];
 		minds.set(mockMinds);
-		render(MindSection);
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		render(MindSection as any);
 
 		expect(screen.queryAllByTestId('mind-row').length).toBe(2);
 
@@ -78,7 +81,8 @@ describe('MindSection Component', () => {
 	it('renders NewMind and MindRow for closed minds when there are no open minds', () => {
 		const mockMinds: Mind[] = [closedMind1, closedMind2];
 		minds.set(mockMinds);
-		render(MindSection);
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		render(MindSection as any);
 
 		expect(screen.queryAllByTestId('mind-row').length).toBe(2);
 

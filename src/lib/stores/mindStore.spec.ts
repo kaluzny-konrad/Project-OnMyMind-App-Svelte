@@ -9,8 +9,15 @@ import {
 } from './mindStore';
 
 describe('mindStore', () => {
+	const mockDate = new Date('2023-08-05T17:57:09.814Z');
+
 	beforeEach(() => {
 		minds.set([]);
+		jest.spyOn(global, 'Date').mockReturnValue(mockDate);
+	});
+
+	afterEach(() => {
+		jest.restoreAllMocks();
 	});
 
 	function getMind(id: string) {
@@ -63,7 +70,12 @@ describe('mindStore', () => {
 		toggleCompleteInStore(id);
 
 		const mind = getMind(id);
-		expect(mind).toEqual({ id, name: 'mindName', isComplete: true });
+		expect(mind).toEqual({
+			id,
+			name: 'mindName',
+			isComplete: true,
+			completeDateTime: mockDate,
+		});
 	});
 
 	it('passing wrong id to toggle - do nothing', () => {
@@ -152,6 +164,7 @@ describe('mindStore', () => {
 			id: secondMindId,
 			name: secondMindName,
 			isComplete: true,
+			completeDateTime: mockDate,
 		});
 	});
 

@@ -20,8 +20,13 @@
 			<EditMindInput {mind} />
 			<Timer mindId={mind.id} active={!mind.isComplete} />
 			{#if mind.isComplete}
-				<ReopenMindButton {mind} />
-				<DeleteMindButton {mind} />
+				<div>
+					{#if mind.completeDateTime}
+						<p class="text-xs text-center font-semibold">{mind.completeDateTime.toLocaleString()}</p>
+					{/if}
+					<ReopenMindButton {mind} />
+					<DeleteMindButton {mind} />
+				</div>
 			{:else}
 				<CompleteMindButton {mind} />
 			{/if}

@@ -44,12 +44,14 @@ describe('DeleteMindButton Component', () => {
 	}
 
 	it('renders the component with standard value', () => {
-		render(DeleteMindButton, { mind: mind });
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		render(DeleteMindButton as any, { mind: mind });
 		expect(screen.getByTestId('delete-task')).toBeInTheDocument();
 	});
 
 	it('triggers the delete event', async () => {
-		render(DeleteMindButton, { mind: mind });
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		render(DeleteMindButton as any, { mind: mind });
 		const button = screen.getByTestId('delete-task');
 
 		expect(mind).not.toBe(undefined);
@@ -61,7 +63,8 @@ describe('DeleteMindButton Component', () => {
 	it('stops timmer when delete', async () => {
 		expect(timer.isRunning).toBe(true);
 
-		render(DeleteMindButton, { mind: mind });
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		render(DeleteMindButton as any, { mind: mind });
 		const button = screen.getByTestId('delete-task');
 
 		button.click();

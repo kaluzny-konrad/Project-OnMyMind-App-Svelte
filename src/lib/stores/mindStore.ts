@@ -41,11 +41,13 @@ export const toggleCompleteInStore = (id: string): void => {
 			updatedMinds.unshift({
 				...mindToToggle,
 				isComplete: false,
+				completeDateTime: undefined,
 			});
 		} else {
 			updatedMinds.push({
 				...mindToToggle,
 				isComplete: true,
+				completeDateTime: new Date(),
 			});
 		}
 		return updatedMinds;
