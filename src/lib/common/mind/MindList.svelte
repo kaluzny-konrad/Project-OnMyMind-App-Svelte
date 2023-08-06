@@ -6,6 +6,7 @@
 	import ReopenMindButton from './mindElements/ReopenMindButton.svelte';
 	import EditMindInput from './mindElements/EditMindInput.svelte';
 	import Timer from '../timer/Timer.svelte';
+	import { dateToShortString } from '../timer/DateVizualizer';
 
 	export let minds: Mind[];
 </script>
@@ -23,13 +24,7 @@
 				<div>
 					{#if mind.completeDateTime}
 						<p class="text-xs text-center font-semibold">
-							{new Date(mind.completeDateTime).toLocaleString([], {
-								year: 'numeric',
-								month: 'short',
-								day: '2-digit',
-								hour: '2-digit',
-								minute: '2-digit',
-							})}
+							{dateToShortString(new Date(mind.completeDateTime))}
 						</p>
 					{/if}
 					<ReopenMindButton {mind} />

@@ -11,10 +11,10 @@ const config: PlaywrightTestConfig = {
 	forbidOnly: !!process.env.CI,
 
 	// Retry on CI only.
-	retries: process.env.CI ? 2 : 0,
+	retries: process.env.CI ? 2 : 1,
 
 	// Opt out of parallel tests on CI.
-	workers: process.env.CI ? 1 : undefined,
+	workers: process.env.CI ? 1 : 10,
 
 	timeout: 15000,
 
@@ -27,13 +27,17 @@ const config: PlaywrightTestConfig = {
 		baseURL: process.env.VERCEL_URL || 'http://localhost:5173/',
 
 		// Collect trace when retrying the failed test.
-		trace: 'off',
+		trace: 'on-first-retry',
 	},
 	// Configure projects for major browsers.
 	projects: [
 		{
 			name: 'chromium',
 			use: { ...devices['Desktop Chrome'] },
+		},
+		{
+			name: 'chromium_mobile',
+			use: { ...devices['Pixel 5'] },
 		},
 	],
 };
