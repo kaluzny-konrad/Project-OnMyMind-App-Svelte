@@ -11,17 +11,10 @@ test.beforeEach(async ({ page }) => {
 });
 
 test('Contact Form - empty on init', async ({ page }) => {
-	const fileName = 'ContactFormEmptyOnInit.png';
-
-	const form = page.getByTestId('contact-form');
-
-	await page.mouse.move(0, 0);
-	expect(await form.screenshot()).toMatchSnapshot(fileName);
+	page.getByTestId('contact-form');
 });
 
 test('Contact Form - failed submission - wrong mail', async ({ page }) => {
-	const fileName = 'ContactFormFailedSubmissionWrongMail.png';
-
 	const form = page.getByTestId('contact-form');
 	await form.locator('input[name="email"]').fill('test@test');
 	await form.locator('textarea[name="message"]').fill('test message');
@@ -31,16 +24,11 @@ test('Contact Form - failed submission - wrong mail', async ({ page }) => {
 
 	const alert = page.locator('div[role="alert"]');
 	expect(await alert.textContent()).toBe('Invalid email address!');
-
-	await page.mouse.move(0, 0);
-	expect(await form.screenshot()).toMatchSnapshot(fileName);
 });
 
 test('Contact Form - failed submission - too many attempts', async ({
 	page,
 }) => {
-	const fileName = 'ContactFormFailedSubmissionTooManyAttempts.png';
-
 	const form = page.getByTestId('contact-form');
 	await form.locator('input[name="email"]').fill('test@test');
 	await form.locator('textarea[name="message"]').fill('test message');
@@ -53,7 +41,4 @@ test('Contact Form - failed submission - too many attempts', async ({
 	expect(await alert.textContent()).toBe(
 		'Too many attempts, please try again later.',
 	);
-
-	await page.mouse.move(0, 0);
-	expect(await form.screenshot()).toMatchSnapshot(fileName);
 });

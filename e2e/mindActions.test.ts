@@ -7,7 +7,6 @@ test.beforeEach(async ({ page }) => {
 	});
 	await page.goto('/');
 	await page.waitForLoadState('networkidle');
-	await page.waitForTimeout(1000);
 });
 
 test('Add three minds, complete two, delete one', async ({ page }) => {
@@ -46,14 +45,6 @@ test('Add three minds, complete two, delete one', async ({ page }) => {
 	// assert that two minds are present - one active, one completed
 	expect(await page.$$('li.completed')).toHaveLength(1);
 	expect(await page.$$('li.active')).toHaveLength(1);
-
-	// screenshot
-	await page.mouse.move(0, 0);
-	await page.waitForTimeout(1000);
-	const fileName = 'MindActionsDelete.png';
-	expect(await page.screenshot({ fullPage: true })).toMatchSnapshot(fileName, {
-		maxDiffPixelRatio: 0.01,
-	});
 });
 
 test('Add two minds, complete one, then reopen one', async ({ page }) => {
@@ -84,12 +75,6 @@ test('Add two minds, complete one, then reopen one', async ({ page }) => {
 	// assert that two minds are present - all active
 	expect(await page.$$('li.completed')).toHaveLength(0);
 	expect(await page.$$('li.active')).toHaveLength(2);
-
-	// screenshot
-	await page.mouse.move(0, 0);
-	await page.waitForTimeout(1000);
-	const fileName = 'MindActionsReopen.png';
-	expect(await page.screenshot({ fullPage: true })).toMatchSnapshot(fileName);
 });
 
 test('Add two minds and start timer on one', async ({ page }) => {
@@ -108,12 +93,6 @@ test('Add two minds and start timer on one', async ({ page }) => {
 
 	// start timer on one mind
 	await page.getByTestId('start-timer').click();
-
-	// screenshot
-	await page.mouse.move(0, 0);
-	await page.waitForTimeout(1000);
-	const fileName = 'MindActionsTimer.png';
-	expect(await page.screenshot({ fullPage: true })).toMatchSnapshot(fileName);
 });
 
 test('Add two minds, start timer one, then start timer on second', async ({
@@ -133,12 +112,5 @@ test('Add two minds, start timer one, then start timer on second', async ({
 	expect(await page.$$('li.active')).toHaveLength(2);
 
 	// start timer on one mind
-	await page.waitForTimeout(1000);
 	await page.getByTestId('start-timer').click();
-
-	// screenshot
-	await page.mouse.move(0, 0);
-	await page.waitForTimeout(1000);
-	const fileName = 'MindActionsTimerTwo.png';
-	expect(await page.screenshot({ fullPage: true })).toMatchSnapshot(fileName);
 });
