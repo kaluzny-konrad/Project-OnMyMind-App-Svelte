@@ -4,12 +4,14 @@
 	import CompletePath from '../../../icons/CompletePath.svelte';
 	import Icon from '../../../icons/Icon.svelte';
 	import { stopTimerInStore } from '../../../stores/timerStore';
+	import { startSuccessAnimation } from '../../../stores/animationStore';
 
 	export let mind: Mind;
 
 	function toggleComplete() {
 		toggleCompleteInStore(mind.id);
 		stopTimerInStore(mind.id);
+		startSuccessAnimation();
 	}
 </script>
 
