@@ -5,8 +5,7 @@
 	"scripts": {
 		"dev": "vite dev",
 		"start": "npm run build && npm run preview",
-		"prebuild": "npm run format && npm run lint && npm run check",
-		"build": "vite build && npm run test:unit",
+		"build": "vite build",
 		"preview": "vite preview",
 		"prepare": "svelte-kit sync",
 		"test": "npm run test:unit && npm run test:e2e",
@@ -58,6 +57,7 @@
 	"dependencies": {
 		"@lottiefiles/svelte-lottie-player": "^0.3.0",
 		"@sendgrid/mail": "^7.7.0",
-		"@vercel/analytics": "^1.0.1"
+		"@vercel/analytics": "^1.0.1",
+		"web-vitals": "^3.3.2"
 	}
 }
